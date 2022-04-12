@@ -20,7 +20,12 @@
         </v-row>
         <v-row class="table-games">
             <v-col cols="12">
-                <v-data-table dense :headers="headers" :items="jogos" item-key="id" class="elevation-1">
+                <v-data-table dense :headers="headers" :items="jogos" item-key="id" class="elevation-1">  
+                <template #[`item.urlimg`]="{ value }">
+                    <a :href="value">
+                        link
+                    </a>
+                </template>              
                 </v-data-table>                              
             </v-col>
         </v-row>
@@ -39,7 +44,7 @@ export default ({
                 {text: "Título", value: "titulo"},
                 {text: "Plataforma", value: "plataforma"},
                 {text: "Valor", value: "valor"},
-                {text: "Imagem", value: "imgurl"},
+                {text: "Imagem", value: "urlimg"},
                 {text: "Editar"}
             ],
             jogos: []            
