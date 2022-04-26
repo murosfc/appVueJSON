@@ -42,7 +42,7 @@
                         <v-card-text>
                             <v-container>
                             <v-row>
-                                <v-col cols="12" sm="6" md="4">
+                                <v-col cols="12" sm="6" md="2">
                                 <v-text-field
                                     v-model="editedItem.id"
                                     label="Id"                                    
@@ -53,20 +53,22 @@
                                     v-model="editedItem.titulo"
                                     label="Título"
                                 ></v-text-field>
-                                </v-col>
+                                </v-col>                                
                                 <v-col cols="12" sm="6" md="4">
-                                <v-text-field
+                                <v-combobox 
                                     v-model="editedItem.plataforma"
                                     label="Plataforma"
-                                ></v-text-field>
+                                    :items="plataformas">                                   
+                                </v-combobox>                               
                                 </v-col>
-                                <v-col cols="12" sm="6" md="4">
+                                <v-col cols="12" sm="6" md="12">
                                 <v-text-field
                                     v-model="editedItem.urlimg"
                                     label="URL da imagem"
-                                ></v-text-field>
+                                    clearable
+                                ></v-text-field>                                                                                                
                                 </v-col>
-                                 <v-col cols="12" sm="6" md="8">
+                                 <v-col cols="12" sm="6" md="4">
                                 <v-text-field
                                     v-model="editedItem.valor"
                                     label="Valor do aluguel"
@@ -129,7 +131,8 @@ export default ({
             jogos: [],                       
             editedItem: {id: "", titulo: "", plataforma: "", urlimg: "", valor: 20},
             defaultItem: {id: "", titulo: "", plataforma: "", urlimg: "", valor: 20},
-            editedIndex: -1                  
+            editedIndex: -1,
+            plataformas: []
         }           
     },
     methods: {
@@ -137,8 +140,14 @@ export default ({
             axios("http://localhost:3000/games")
             .then((response)=> {
                 this.jogos = response.data;                
-            })
-            .catch((error)=> console.log(error));            
+            })                       
+            .catch((error)=> console.log(error));
+            axios("http://localhost:3000/plataformas")
+            .then((response)=> {
+                this.plataformas = response.data; 
+                console.log(this.plataformas)               
+            })                       
+            .catch((error)=> console.log(error));             
         },
         close(){
             this.dialog = false
@@ -188,7 +197,10 @@ export default ({
                 this.games.splice(index, 1);                
             })
             .catch((error) => console.log(error));
-        }       
+        } ,
+        limpar(){
+            this.editedItem.urlimg = "";
+        }      
     },
     created() {
         this.inicializa();

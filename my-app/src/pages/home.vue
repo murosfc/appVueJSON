@@ -12,19 +12,21 @@
       </v-col>
     </v-row>  
     <template>
-      <v-row class="jogos_disponiveis">
-        <v-col cols="12"  v-for="jogo in jogos" :key="jogo.id">      
+      <div class="flex-container">
+        <div v-for="jogo in jogos" :key="jogo.id" class="flex-item">             
           <h3>{{jogo.titulo}}</h3>
-          <img scr={jogo.imgurl}/>
+          <img :src="jogo.urlimg" class="game-pic"/>
           <h4>Plataforma: {{jogo.plataforma}}</h4>
           <span>Valor do aluguel = R$ {{jogo.valor}}</span> 
-        </v-col>
-      </v-row>
-    </template>
-   </v-container>
+        </div>
+      </div>
+    </template>  
+  </v-container> 
 </template>
+
 <script>
 import axios from "axios";
+require('@/assets/styles/estilo.css')
 export default ({
     name: "homePage",
     data: () => {
@@ -38,13 +40,12 @@ export default ({
         axios("http://localhost:3000/games")
         .then((response)=> {
             this.jogos = response.data;                
-        })
-        .catch((error)=> console.log(error));
-        console.log(this.jogos);            
+        })                       
+        .catch((error)=> console.log(error));                        
       },
-      created() {
-        this.inicializa();
-      } 
-    }
+    },
+    created() {
+      this.inicializa();
+    }    
 })
 </script>
