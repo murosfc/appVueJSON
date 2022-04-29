@@ -17,7 +17,14 @@
           <h3>{{jogo.titulo}}</h3>
           <img :src="jogo.urlimg" class="game-pic"/>
           <h4>Plataforma: {{jogo.plataforma}}</h4>
-          <span>Valor do aluguel = R$ {{jogo.valor}}</span> 
+          <span>Valor do aluguel = R$ {{jogo.valor}} >
+          <v-btn
+              icon
+              color="blue"
+              disabled
+            >
+              <v-icon>cart-arrow-down</v-icon>
+            </v-btn>
         </div>
       </div>
     </template>  

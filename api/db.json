@@ -5,35 +5,35 @@
       "titulo": "The Legend of Zelda™: Breath of the Wild",
       "plataforma": "Nintendo Switch",
       "urlimg": "https://assets.nintendo.com/image/upload/c_pad,f_auto,h_613,q_auto,w_1089/ncom/pt_BR/games/switch/t/the-legend-of-zelda-breath-of-the-wild-switch/hero?v=2022021721",
-      "valor": "15,50"
+      "valor": 15.5
     },
     {
       "id": 2,
       "titulo": "Forza Horizon 5 Edição Padrão",
       "plataforma": "Xbox Series",
-      "urlimg": "https://cdn.akamai.steamstatic.com/steam/apps/1551360/capsule_616x353.jpg?t=1650550157",
-      "valor": "15,50"
+      "urlimg": "https://store-images.s-microsoft.com/image/apps.49800.13718773309227929.bebdcc0e-1ed5-4778-8732-f4ef65a2f445.9ac09d39-064d-466c-81ca-2f1b6f0b95c5?q=90&w=177&h=265",
+      "valor": 15.5
     },
     {
       "id": 3,
       "titulo": "Horizon Forbidden West - Edição Deluxe",
       "plataforma": "Playstation 5",
-      "urlimg": "https://olhardigital.com.br/wp-content/uploads/2022/01/HORIZON-FORBIDDEN-WEST.jpg",
-      "valor": "20,00"
+      "urlimg": "https://image.api.playstation.com/vulcan/ap/rnd/202107/3100/ki0STHGAkIF06Q4AU8Ow4OkV.png",
+      "valor": 20
     },
     {
       "id": 4,
       "titulo": "Super Mario Odissey",
       "plataforma": "Nintendo Switch",
       "urlimg": "https://assets.nintendo.com/image/upload/c_pad,f_auto,h_613,q_auto,w_1089/ncom/pt_BR/games/switch/s/super-mario-odyssey-switch/hero?v=2022021722",
-      "valor": "10,00"
+      "valor": 10
     },
     {
       "id": 5,
       "titulo": "Halo Infinite",
       "plataforma": "Xbox Series",
-      "urlimg": "https://kosgames.com/wp-content/uploads/2021/12/capsule_616x353-2021-12-21T113647.734.jpg",
-      "valor": "15,50"
+      "urlimg": "https://store-images.s-microsoft.com/image/apps.21536.13727851868390641.c9cc5f66-aff8-406c-af6b-440838730be0.68796bde-cbf5-4eaa-a299-011417041da6?q=90&w=177&h=265",
+      "valor": 15.5
     }
   ],
   "funcionarios": [
@@ -44,28 +44,22 @@
       "whatsapp": "(22)9700-0001",
       "email": "bosonhiggs@ongames.com",
       "senha": "Mh4921Bah@"
-    }
-  ],
-  "plataformas": [
-    {
-      "id": "1",
-      "nome": "Nintendo Switch"
     },
     {
-      "id": "2",
-      "nome": "Playstation 4"
+      "id": 2,
+      "nome": "Pedro Oliveira",
+      "nick": "sniperZ",
+      "whatsapp": "(22)9700-0002",
+      "email": "sniperz@ongames.com",
+      "senha": "SSh4238M!"
     },
     {
-      "id": "3",
-      "nome": "Playstation 5"
-    },
-    {
-      "id": "4",
-      "nome": "Xbox One/X"
-    },   
-    {
-      "id": "5",
-      "nome": "Xbox Series"
+      "id": 3,
+      "nome": "Camilo Henrique Silva",
+      "nick": "Ranger_Rosa",
+      "whatsapp": "(22)9700-0003",
+      "email": "rangerrosa@ongames.com",
+      "senha": "!SHCam0383"
     }
   ]
 }
