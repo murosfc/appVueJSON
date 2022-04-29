@@ -5,23 +5,16 @@
                 <h1>{{titulo}}</h1>
             </v-col>      
         </v-row>
-        <v-row class="table-games">
+        <v-row class="table-plat">
             <v-col cols="12">
-                <v-data-table dense :headers="headers" :items="jogos" item-key="id" class="elevation-1">  
-                <template #[`item.urlimg`]="{ value }">
-                    <div class="hover_img">
-                        <a :href="value">
-                            link<span><img :src="value" alt="imagem do jogo" height="100" /></span>
-                        </a>
-                    </div>
-                </template>                 
+                <v-data-table dense :headers="headers" :items="plataformas" item-key="id" class="elevation-1">                               
                  ##Formulario
                 <template v-slot:top>
                     <v-toolbar flat>
-                    <v-toolbar-title>Jogos cadastrados</v-toolbar-title>
-                    <v-divider class="mx-4" inset vertical></v-divider>                    
+                    <v-toolbar-title>Plataformas cadastradas</v-toolbar-title>
                     <v-spacer></v-spacer>
-                    <v-dialog v-model="dialog" max-width="700px" max-length="500px">
+                    <v-divider class="mx-4" inset vertical></v-divider>            
+                    <v-dialog v-model="dialog" max-width="300px" max-length="50px">
                         <template v-slot:activator="{ on, attrs }">
                         <v-btn 
                             class="mx-2"
@@ -39,7 +32,7 @@
                         </template>
                         <v-card>
                         <v-card-title>
-                            <span class="headline">Adicionar/Editar Jogo</span>
+                            <span class="headline">Adicionar/Editar Plataforma</span>
                         </v-card-title>
                         <v-card-text>
                             <v-container>
@@ -49,34 +42,13 @@
                                     v-model="editedItem.id"
                                     label="Id"                                    
                                 ></v-text-field>
-                                </v-col>
+                                 </v-col>
                                 <v-col cols="12" sm="6" md="8">
                                 <v-text-field
-                                    v-model="editedItem.titulo"
-                                    label="Título"
-                                ></v-text-field>
-                                </v-col>                                
-                                <v-col cols="12" sm="6" md="4">
-                                <v-combobox 
-                                    v-model="editedItem.plataforma"
-                                    label="Plataforma"
-                                    :items="plataformas">                                   
-                                </v-combobox>                               
-                                </v-col>
-                                <v-col cols="12" sm="6" md="12">
-                                <v-text-field
-                                    v-model="editedItem.urlimg"
-                                    label="URL da imagem"
-                                    clearable
-                                ></v-text-field>                                                                                                
-                                </v-col>
-                                 <v-col cols="12" sm="6" md="4">
-                                <v-text-field
-                                    v-model="editedItem.valor"
-                                    label="Valor do aluguel"
-                                ></v-text-field>
-                                </v-col>
-                                
+                                    v-model="editedItem.nome"
+                                    label="Plataforma"                                    
+                                ></v-text-field> 
+                                </v-col>                               
                             </v-row>
                             </v-container>
                         </v-card-text>
@@ -116,34 +88,25 @@
 <script>
 import axios from "axios";
 export default ({
-    name: "GamesCrud",
+    name: "PlataformasCrud",
     data: () => {
         return {
-            titulo: "Edição de banco de dados de jogos",
+            titulo: "Edição de plataformas",
             search: "",
             dialog: false,
-            headers: [
+            headers: [                
                 {text: "Id", value: "id"},
-                {text: "Título", value: "titulo"},
-                {text: "Plataforma", value: "plataforma"},
-                {text: "Valor", value: "valor"},
-                {text: "Imagem", value: "urlimg"},
-                {text: "Ações", value: "actions", sortable: false }                
+                {text: "Plataforma", value: "nome"},
+                {text: "Ações", value: "actions", sortable: false }                                
             ],
-            jogos: [],                       
-            editedItem: {id: "", titulo: "", plataforma: "", urlimg: "", valor: 20},
-            defaultItem: {id: "", titulo: "", plataforma: "", urlimg: "", valor: 20},
-            editedIndex: -1,
-            plataformas: []
+            plataformas: [],                    
+            editedItem: {id: "", nome: ""},
+            defaultItem: {id: "", nome: ""},
+            editedIndex: -1            
         }           
     },
     methods: {
-        inicializa() {
-            axios("http://localhost:3000/games")
-            .then((response)=> {
-                this.jogos = response.data;                
-            })                       
-            .catch((error)=> console.log(error));
+        inicializa() {   
             axios("http://localhost:3000/plataformas")
             .then((response)=> {
                 this.plataformas = response.data; 
@@ -163,46 +126,43 @@ export default ({
                 //alteracao
                 axios
                 .put(
-                    "http://localhost:3000/games/" + this.editedItem.id,
+                    "http://localhost:3000/plataformas/" + this.editedItem.id,
                     this.editedItem
                 )
                 .then((response) => {
                     console.log(response);
-                    Object.assign(this.jogos[this.editedIndex], this.editedItem);
+                    Object.assign(this.plataformas[this.editedIndex], this.editedItem);
                     this.close();
                 })
                 .catch((error) => console.log(error));
             } else {
                 //Inclusao
                 axios
-                .post("http://localhost:3000/jogos", this.editedItem)
+                .post("http://localhost:3000/plataformas", this.editedItem)
                 .then((response) => {
                     console.log(response);
-                    this.jogos.push(this.editedItem);
+                    this.plataformas.push(this.editedItem);
                     this.close();
                 })
                 .catch((error) => console.log(error));
             }         
         },
         editItem(item) {
-        this.editedIndex = this.jogos.indexOf(item);
+        this.editedIndex = this.plataformas.indexOf(item);
         this.editedItem = Object.assign({}, item);
         this.dialog = true;
         },
         deleteItem(item) {
-        const index = this.jogos.indexOf(item);
-        confirm("Deseja apagar este item de id ?" + item.id) &&
+        const index = this.plataformas.indexOf(item);        
+        confirm("Deseja apagar o item de id "+  item.id +"?") &&
             axios
-            .delete("http://localhost:3000/games/" + item.id)
+            .delete("http://localhost:3000/plataformas/" + item.id)
             .then((response) => {
                 console.log(response.data);
-                this.games.splice(index, 1);                
+                this.plataformas.splice(index, 1);                
             })
             .catch((error) => console.log(error));
-        } ,
-        limpar(){
-            this.editedItem.urlimg = "";
-        }      
+        }             
     },
     created() {
         this.inicializa();
@@ -218,8 +178,5 @@ export default ({
         flex-grow: 0;
         margin-left: auto;
         margin-right: 0;
-   } 
-    .hover_img a { position:relative;}
-    .hover_img a span { position:relative; display:none; z-index:99; }
-    .hover_img a:hover span { display:block; }   
+   }  
 </style>

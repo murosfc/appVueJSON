@@ -47,10 +47,25 @@
     }
   ],
   "plataformas": [
-    "Nintendo Switch",
-    "Playstation 4",
-    "Playstation 5",
-    "Xbox One",
-    "Xbox Series"
+    {
+      "id": "1",
+      "nome": "Nintendo Switch"
+    },
+    {
+      "id": "2",
+      "nome": "Playstation 4"
+    },
+    {
+      "id": "3",
+      "nome": "Playstation 5"
+    },
+    {
+      "id": "4",
+      "nome": "Xbox One/X"
+    },   
+    {
+      "id": "5",
+      "nome": "Xbox Series"
+    }
   ]
 }
