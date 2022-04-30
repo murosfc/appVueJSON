@@ -5,35 +5,35 @@
       "titulo": "The Legend of Zelda™: Breath of the Wild",
       "plataforma": "Nintendo Switch",
       "urlimg": "https://assets.nintendo.com/image/upload/c_pad,f_auto,h_613,q_auto,w_1089/ncom/pt_BR/games/switch/t/the-legend-of-zelda-breath-of-the-wild-switch/hero?v=2022021721",
-      "valor": "15,50"
+      "valor": "15.50"
     },
     {
       "id": 2,
       "titulo": "Forza Horizon 5 Edição Padrão",
       "plataforma": "Xbox Series",
       "urlimg": "https://cdn.akamai.steamstatic.com/steam/apps/1551360/capsule_616x353.jpg?t=1650550157",
-      "valor": "15,50"
+      "valor": "15.50"
     },
     {
       "id": 3,
       "titulo": "Horizon Forbidden West - Edição Deluxe",
       "plataforma": "Playstation 5",
       "urlimg": "https://olhardigital.com.br/wp-content/uploads/2022/01/HORIZON-FORBIDDEN-WEST.jpg",
-      "valor": "20,00"
+      "valor": "20.00"
     },
     {
       "id": 4,
       "titulo": "Super Mario Odissey",
       "plataforma": "Nintendo Switch",
       "urlimg": "https://assets.nintendo.com/image/upload/c_pad,f_auto,h_613,q_auto,w_1089/ncom/pt_BR/games/switch/s/super-mario-odyssey-switch/hero?v=2022021722",
-      "valor": "10,00"
+      "valor": "10.00"
     },
     {
       "id": 5,
       "titulo": "Halo Infinite",
       "plataforma": "Xbox Series",
       "urlimg": "https://kosgames.com/wp-content/uploads/2021/12/capsule_616x353-2021-12-21T113647.734.jpg",
-      "valor": "15,50"
+      "valor": "20.00"
     }
   ],
   "funcionarios": [
@@ -41,9 +41,38 @@
       "id": 1,
       "nome": "Luis Silva",
       "nick": "BosonHiggs",
-      "whatsapp": "(22)9700-0001",
+      "whatsapp": "(22)9970-0001",
       "email": "bosonhiggs@ongames.com",
       "senha": "Mh4921Bah@"
+    },
+    {
+      "id": "2",
+      "nome": "Pedro da Silva",
+      "nick": "theSniper",
+      "whatsapp": "(22)9970-0002",
+      "email": "thesniper@ongames.com"
+    },
+    {
+      "id": "3",
+      "nome": "Carlos Henrique Oliveira",
+      "nick": "chclucher",
+      "whatsapp": "(22)9970-0003",
+      "email": "chclucher@ongames.com"
+    },
+    {
+      "id": "4",
+      "nome": "Camila Barros Prado",
+      "nick": "camiCamper",
+      "whatsapp": "(22)9970-0004",
+      "email": "camicamper@ongames.com"
+    },
+    {
+      "id": "5",
+      "nome": "Larissa Hespanhol",
+      "nick": "lari",
+      "whatsapp": "(22)9970-0005",
+      "email": "lari@ongames.com",
+      "senha": "55NmOV8I"
     }
   ],
   "plataformas": [
@@ -62,7 +91,7 @@
     {
       "id": "4",
       "nome": "Xbox One/X"
-    },   
+    },
     {
       "id": "5",
       "nome": "Xbox Series"

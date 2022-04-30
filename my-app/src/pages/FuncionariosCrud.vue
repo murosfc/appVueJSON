@@ -5,20 +5,13 @@
                 <h1>{{titulo}}</h1>
             </v-col>      
         </v-row>
-        <v-row class="table-games">
+        <v-row class="table-funcionarios">
             <v-col cols="12">
-                <v-data-table dense :headers="headers" :items="jogos" item-key="id" class="elevation-1">  
-                <template #[`item.urlimg`]="{ value }">
-                    <div class="hover_img">
-                        <a :href="value">
-                            link<span><img :src="value" alt="imagem do jogo" height="100" /></span>
-                        </a>
-                    </div>
-                </template>                 
+                <v-data-table dense :headers="headers" :items="funcionarios" item-key="id" class="elevation-1">                          
                  ##Formulario
                 <template v-slot:top>
                     <v-toolbar flat>
-                    <v-toolbar-title>Jogos cadastrados</v-toolbar-title>
+                    <v-toolbar-title>Funcionários cadastrados</v-toolbar-title>
                     <v-divider class="mx-4" inset vertical></v-divider>                    
                     <v-spacer></v-spacer>
                     <v-dialog v-model="dialog" max-width="700px" max-length="500px">
@@ -39,7 +32,7 @@
                         </template>
                         <v-card>
                         <v-card-title>
-                            <span class="headline">Adicionar/Editar Jogo</span>
+                            <span class="headline">Adicionar/Editar Funcionários</span>
                         </v-card-title>
                         <v-card-text>
                             <v-container>
@@ -52,31 +45,28 @@
                                 </v-col>
                                 <v-col cols="12" sm="6" md="8">
                                 <v-text-field
-                                    v-model="editedItem.titulo"
-                                    label="Título"
+                                    v-model="editedItem.nome"
+                                    label="Nome"
                                 ></v-text-field>
                                 </v-col>                                
-                                <v-col cols="12" sm="6" md="4">
-                                <v-combobox 
-                                    v-model="editedItem.plataforma"
-                                    label="Plataforma"
-                                    :items="plataformas">                                   
-                                </v-combobox>                               
-                                </v-col>
-                                <v-col cols="12" sm="6" md="12">
+                                <v-col cols="12" sm="6" md="6">
                                 <v-text-field
-                                    v-model="editedItem.urlimg"
-                                    label="URL da imagem"
-                                    clearable
+                                    v-model="editedItem.nick"
+                                    label="Nickname"
+                                ></v-text-field>                               
+                                </v-col>
+                                <v-col cols="12" sm="6" md="6">
+                                <v-text-field
+                                    v-model="editedItem.whatsapp"
+                                    label="Whatsapp"                                    
                                 ></v-text-field>                                                                                                
                                 </v-col>
-                                 <v-col cols="12" sm="6" md="4">
+                                 <v-col cols="12" sm="6" md="6">
                                 <v-text-field
-                                    v-model="editedItem.valor"
-                                    label="Valor do aluguel"
+                                    v-model="editedItem.email"
+                                    label="e-mail"
                                 ></v-text-field>
-                                </v-col>
-                                
+                                </v-col>                                
                             </v-row>
                             </v-container>
                         </v-card-text>
@@ -116,41 +106,30 @@
 <script>
 import axios from "axios";
 export default ({
-    name: "GamesCrud",
+    name: "FuncionariosCrud",
     data: () => {
         return {
-            titulo: "Edição de banco de dados de jogos",
-            search: "",
+            titulo: "Edição de banco de dados de funcionários",            
             dialog: false,
             headers: [
                 {text: "Id", value: "id"},
-                {text: "Título", value: "titulo"},
-                {text: "Plataforma", value: "plataforma"},
-                {text: "Valor", value: "valor"},
-                {text: "Imagem", value: "urlimg"},
+                {text: "Nome", value: "nome"},
+                {text: "Nick", value: "nick"},
+                {text: "Whatasapp", value: "whatsapp"},
+                {text: "e-mail", value: "email"},
                 {text: "Ações", value: "actions", sortable: false }                
             ],
-            jogos: [],                       
-            editedItem: {id: "", titulo: "", plataforma: "", urlimg: "", valor: 20},
-            defaultItem: {id: "", titulo: "", plataforma: "", urlimg: "", valor: 20},
-            editedIndex: -1,
-            plataformas: [],
+            funcionarios: [],                       
+            editedItem: {id: "", nome: "", nick: "", whatsapp: "(22)9970-00", email: "@ongames.com"},
+            defaultItem: {id: "", nome: "", nick: "", whatsapp: "(22)9970-00", email: "@ongames.com"},
+            editedIndex: -1,           
         }           
     },
     methods: {
-        inicializa() {
-            axios("http://localhost:3000/games")
+        inicializa() {            
+            axios("http://localhost:3000/funcionarios")
             .then((response)=> {
-                this.jogos = response.data;                
-            })                       
-            .catch((error)=> console.log(error));
-
-            axios("http://localhost:3000/plataformas")
-            .then((response)=> { 
-                for (var i=0;i<response.data.length;i++){
-                    this.plataformas.push(response.data[i].nome);
-                } 
-                console.log(this.plataformas);                                   
+                this.funcionarios = response.data;                             
             })                       
             .catch((error)=> console.log(error));             
         },
@@ -166,46 +145,56 @@ export default ({
                 //alteracao
                 axios
                 .put(
-                    "http://localhost:3000/games/" + this.editedItem.id,
+                    "http://localhost:3000/funcionarios/" + this.editedItem.id,
                     this.editedItem
                 )
                 .then((response) => {
                     console.log(response);
-                    Object.assign(this.jogos[this.editedIndex], this.editedItem);
+                    Object.assign(this.funcionarios[this.editedIndex], this.editedItem);
                     this.close();
                 })
                 .catch((error) => console.log(error));
             } else {
                 //Inclusao
+                this.editedItem.senha = this.senhaInicial();
                 axios
-                .post("http://localhost:3000/jogos", this.editedItem)
+                .post("http://localhost:3000/funcionarios", this.editedItem)
                 .then((response) => {
                     console.log(response);
-                    this.jogos.push(this.editedItem);
+                    this.funcionarios.push(this.editedItem);
                     this.close();
                 })
                 .catch((error) => console.log(error));
             }         
         },
         editItem(item) {
-        this.editedIndex = this.jogos.indexOf(item);
+        this.editedIndex = this.funcionarios.indexOf(item);
         this.editedItem = Object.assign({}, item);
         this.dialog = true;
         },
         deleteItem(item) {
-        const index = this.jogos.indexOf(item);
+        const index = this.funcionarios.indexOf(item);
         confirm("Deseja apagar este item de id ?" + item.id) &&
             axios
-            .delete("http://localhost:3000/games/" + item.id)
+            .delete("http://localhost:3000/funcionarios/" + item.id)
             .then((response) => {
                 console.log(response.data);
-                this.games.splice(index, 1);                
+                this.funcionarios.splice(index, 1);                
             })
             .catch((error) => console.log(error));
         } ,
+        senhaInicial() {
+            var tamanho = 8;
+            var stringAleatoria = '';
+            var caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$&?[]{}()';
+            for (var i = 0; i < tamanho; i++) {
+                stringAleatoria += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+            }
+            return stringAleatoria;
+        },
         limpar(){
             this.editedItem.urlimg = "";
-        }      
+        },              
     },
     created() {
         this.inicializa();

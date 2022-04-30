@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import HomeView from '../pages/home.vue'
 import GamesCrud from '../pages/GamesCrud'
 import PlataformasCrud from '../pages/PlataformasCrud'
+import ClientesCrud from '../pages/ClientesCrud'
+import FuncionariosCrud from '../pages/FuncionariosCrud'
 
 Vue.use(VueRouter)
 
@@ -21,6 +23,16 @@ const routes = [
     path: '/plataformas',
     name: 'plataformascrud',
     component: PlataformasCrud
+  },
+  {
+    path: '/clientes',
+    name: 'clientes',
+    component: ClientesCrud
+  },
+  {
+    path: '/funcionarios',
+    name: 'funcionarios',
+    component: FuncionariosCrud
   }
 ]
 
