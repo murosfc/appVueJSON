@@ -78,45 +78,53 @@
   "clientes": [
     {
       "id": 1,
+      "cpf": "782.058.766-06",
       "nome": "Severino Erick Caldeira",
-      "cep": "40320-010",
-      "nick": "severino",
-      "whatsapp": "(67) 3523-0344",
       "email": "severinoerickcaldeira@bucaneiro.com.br",
-      "senha": "f896QpeOSG"
+      "senha": "f896QpeOSG",
+      "cep": "40320-010",
+      "numero":"260",
+      "complemento": "Quadra Quadra 1B"
     },
     {
-      "id": "2",
-      "cep": "59037-480",
-      "nome": "Sueli Evelyn Mariane da Conceição",
-      "nick": "evelyn",
-      "whatsapp": "(69) 2697-2998",
-      "email": "suelievelyndaconceicao@tribunadeindaia.com.br"
+      "id": 2,
+      "cpf": "796.185.703-63",
+      "nome": "Sônia Sophie Raimunda Corte Real",
+      "email": "sonia-cortereal89@gm.com",
+      "senha": "srrKE939pE",
+      "cep": "53439-200",
+      "numero":"104",
+      "complemento": "Janga"
     },
     {
-      "id": "3",
-      "cep": "65058-042",
-      "nome": "Carlos Henrique Oliveira",
-      "nick": "chclucher",
-      "whatsapp": "(22)9970-0003",
-      "email": "chclucher@ongames.com"
+      "id": 3,
+      "cpf": "452.526.408-07",
+      "nome": "Vitor Anderson Nathan Brito",
+      "email": "vitor_brito@w3ag.com",
+      "senha": "BWQkAYFjom",
+      "cep": "94410-440",
+      "numero":"251",
+      "complemento": "Centro"
     },
     {
-      "id": "4",
-      "cep": "69316-800",
-      "nome": "Cauê Emanuel Igor Barros",
-      "nick": "emanuel",
-      "whatsapp": "(63) 3526-4997",
-      "email": "caue_barros@capua.com.br"
+      "id": 4,
+      "cpf": "320.526.847-43",
+      "nome": "João Vinicius Rafael Nunes",
+      "email": "joaoviniciusnunes@gutembier.com.br",
+      "senha": "1OTKnIi5JG",
+      "cep": "69098-146",
+      "numero":"699",
+      "complemento": "Novo Aleixo"
     },
     {
-      "id": "5",
-      "cep": "75143-650",
-      "nome": "Cristiane Priscila Nunes",
-      "nick": "nunes",
-      "whatsapp": "(21) 2993-5169",
-      "email": "cristiane_nunes@oi15.com.br",
-      "senha": "Ly12B8rgly"
+      "id": 5,
+      "cpf": "604.851.326-72",
+      "nome": "Cristiane Rita Eloá Ribeiro",
+      "email": "cristiane_rita_ribeiro@maccropropaganda.com.br",
+      "senha": "m94SWg5b6y",
+      "cep": "57082-890",
+      "numero":"953",
+      "complemento": "Santa Lúcia"
     }
   ],
   "plataformas": [
