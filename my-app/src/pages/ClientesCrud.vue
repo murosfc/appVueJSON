@@ -45,30 +45,38 @@
                                 </v-col>
                                 <v-col cols="12" sm="6" md="8">
                                 <v-text-field
+                                    v-model="editedItem.cpf"
+                                    label="CPF"
+                                ></v-text-field>
+                                <v-text-field
                                     v-model="editedItem.nome"
                                     label="Nome"
                                 ></v-text-field>
                                 </v-col>                                
                                 <v-col cols="12" sm="6" md="6">
                                 <v-text-field
-                                    v-model="editedItem.nick"
-                                    label="Nickname"
+                                    v-model="editedItem.email"
+                                    label="Email"
                                 ></v-text-field>                               
                                 </v-col>
                                 <v-col cols="12" sm="6" md="6">
                                 <v-text-field
-                                    v-model="editedItem.whatsapp"
-                                    label="Whatsapp"                                    
+                                    v-model="editedItem.senha"
+                                    label="Senha"                                    
                                 ></v-text-field>                                                                                                
                                 </v-col>
                                  <v-col cols="12" sm="6" md="6">
                                 <v-text-field
-                                    v-model="editedItem.email"
-                                    label="e-mail"
-                                ></v-text-field>
-                                <v-text-field
                                     v-model="editedItem.cep"
                                     label="CEP"
+                                ></v-text-field>
+                                <v-text-field
+                                    v-model="editedItem.numero"
+                                    label="Número"
+                                ></v-text-field>
+                                <v-text-field
+                                    v-model="editedItem.complemento"
+                                    label="Complemento"
                                 ></v-text-field>
                                 </v-col>                                
                             </v-row>
@@ -117,16 +125,19 @@ export default ({
             dialog: false,
             headers: [
                 {text: "Id", value: "id"},
+                {text: "CPF", value: "cpf"},
                 {text: "Nome", value: "nome"},
-                {text: "Nick", value: "nick"},
-                {text: "Whatasapp", value: "whatsapp"},
                 {text: "e-mail", value: "email"},
+                {text: "Senha", value: "senha"},
                 {text: "CEP", value: "cep"},
+                {text: "Número", value: "numero"},
+                {text: "Complemento", value: "complemento"},
+
                 {text: "Ações", value: "actions", sortable: false }                
             ],
             clientes: [],                       
-            editedItem: {id: "", nome: "", nick: "", whatsapp: "", email: "", cep:""},
-            defaultItem: {id: "", nome: "", nick: "", whatsapp: "", email: "", cep:"",},
+            editedItem: {id: "", cpf: "", nome: "", email: "", senha: "", cep: "", numero:"", complemeto:""},
+            defaultItem: {id: "", cpf: "", nome: "", email: "", senha: "", cep: "", numero:"", complemeto:""},
             editedIndex: -1,           
         }           
     },
