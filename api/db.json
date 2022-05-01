@@ -75,6 +75,50 @@
       "senha": "55NmOV8I"
     }
   ],
+  "clientes": [
+    {
+      "id": 1,
+      "nome": "Severino Erick Caldeira",
+      "cep": "40320-010",
+      "nick": "severino",
+      "whatsapp": "(67) 3523-0344",
+      "email": "severinoerickcaldeira@bucaneiro.com.br",
+      "senha": "f896QpeOSG"
+    },
+    {
+      "id": "2",
+      "cep": "59037-480",
+      "nome": "Sueli Evelyn Mariane da Conceição",
+      "nick": "evelyn",
+      "whatsapp": "(69) 2697-2998",
+      "email": "suelievelyndaconceicao@tribunadeindaia.com.br"
+    },
+    {
+      "id": "3",
+      "cep": "65058-042",
+      "nome": "Carlos Henrique Oliveira",
+      "nick": "chclucher",
+      "whatsapp": "(22)9970-0003",
+      "email": "chclucher@ongames.com"
+    },
+    {
+      "id": "4",
+      "cep": "69316-800",
+      "nome": "Cauê Emanuel Igor Barros",
+      "nick": "emanuel",
+      "whatsapp": "(63) 3526-4997",
+      "email": "caue_barros@capua.com.br"
+    },
+    {
+      "id": "5",
+      "cep": "75143-650",
+      "nome": "Cristiane Priscila Nunes",
+      "nick": "nunes",
+      "whatsapp": "(21) 2993-5169",
+      "email": "cristiane_nunes@oi15.com.br",
+      "senha": "Ly12B8rgly"
+    }
+  ],
   "plataformas": [
     {
       "id": "1",
