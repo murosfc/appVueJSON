@@ -5,35 +5,35 @@
       "titulo": "The Legend of Zelda™: Breath of the Wild",
       "plataforma": "Nintendo Switch",
       "urlimg": "https://assets.nintendo.com/image/upload/c_pad,f_auto,h_613,q_auto,w_1089/ncom/pt_BR/games/switch/t/the-legend-of-zelda-breath-of-the-wild-switch/hero?v=2022021721",
-      "valor": 15.5
+      "valor": "15.50"
     },
     {
       "id": 2,
       "titulo": "Forza Horizon 5 Edição Padrão",
       "plataforma": "Xbox Series",
-      "urlimg": "https://store-images.s-microsoft.com/image/apps.49800.13718773309227929.bebdcc0e-1ed5-4778-8732-f4ef65a2f445.9ac09d39-064d-466c-81ca-2f1b6f0b95c5?q=90&w=177&h=265",
-      "valor": 15.5
+      "urlimg": "https://cdn.akamai.steamstatic.com/steam/apps/1551360/capsule_616x353.jpg?t=1650550157",
+      "valor": "15.50"
     },
     {
       "id": 3,
       "titulo": "Horizon Forbidden West - Edição Deluxe",
       "plataforma": "Playstation 5",
-      "urlimg": "https://image.api.playstation.com/vulcan/ap/rnd/202107/3100/ki0STHGAkIF06Q4AU8Ow4OkV.png",
-      "valor": 20
+      "urlimg": "https://olhardigital.com.br/wp-content/uploads/2022/01/HORIZON-FORBIDDEN-WEST.jpg",
+      "valor": "20.00"
     },
     {
       "id": 4,
       "titulo": "Super Mario Odissey",
       "plataforma": "Nintendo Switch",
       "urlimg": "https://assets.nintendo.com/image/upload/c_pad,f_auto,h_613,q_auto,w_1089/ncom/pt_BR/games/switch/s/super-mario-odyssey-switch/hero?v=2022021722",
-      "valor": 10
+      "valor": "10.00"
     },
     {
       "id": 5,
       "titulo": "Halo Infinite",
       "plataforma": "Xbox Series",
-      "urlimg": "https://store-images.s-microsoft.com/image/apps.21536.13727851868390641.c9cc5f66-aff8-406c-af6b-440838730be0.68796bde-cbf5-4eaa-a299-011417041da6?q=90&w=177&h=265",
-      "valor": 15.5
+      "urlimg": "https://kosgames.com/wp-content/uploads/2021/12/capsule_616x353-2021-12-21T113647.734.jpg",
+      "valor": "20.00"
     }
   ],
   "funcionarios": [
@@ -41,25 +41,112 @@
       "id": 1,
       "nome": "Luis Silva",
       "nick": "BosonHiggs",
-      "whatsapp": "(22)9700-0001",
+      "whatsapp": "(22)9970-0001",
       "email": "bosonhiggs@ongames.com",
       "senha": "Mh4921Bah@"
     },
     {
+      "id": "2",
+      "nome": "Pedro da Silva",
+      "nick": "theSniper",
+      "whatsapp": "(22)9970-0002",
+      "email": "thesniper@ongames.com"
+    },
+    {
+      "id": "3",
+      "nome": "Carlos Henrique Oliveira",
+      "nick": "chclucher",
+      "whatsapp": "(22)9970-0003",
+      "email": "chclucher@ongames.com"
+    },
+    {
+      "id": "4",
+      "nome": "Camila Barros Prado",
+      "nick": "camiCamper",
+      "whatsapp": "(22)9970-0004",
+      "email": "camicamper@ongames.com"
+    },
+    {
+      "id": "5",
+      "nome": "Larissa Hespanhol",
+      "nick": "lari",
+      "whatsapp": "(22)9970-0005",
+      "email": "lari@ongames.com",
+      "senha": "55NmOV8I"
+    }
+  ],
+  "clientes": [
+    {
+      "id": 1,
+      "cpf": "782.058.766-06",
+      "nome": "Severino Erick Caldeira",
+      "email": "severinoerickcaldeira@bucaneiro.com.br",
+      "senha": "f896QpeOSG",
+      "cep": "40320-010",
+      "numero":"260",
+      "complemento": "Quadra Quadra 1B"
+    },
+    {
       "id": 2,
-      "nome": "Pedro Oliveira",
-      "nick": "sniperZ",
-      "whatsapp": "(22)9700-0002",
-      "email": "sniperz@ongames.com",
-      "senha": "SSh4238M!"
+      "cpf": "796.185.703-63",
+      "nome": "Sônia Sophie Raimunda Corte Real",
+      "email": "sonia-cortereal89@gm.com",
+      "senha": "srrKE939pE",
+      "cep": "53439-200",
+      "numero":"104",
+      "complemento": "Janga"
     },
     {
       "id": 3,
-      "nome": "Camilo Henrique Silva",
-      "nick": "Ranger_Rosa",
-      "whatsapp": "(22)9700-0003",
-      "email": "rangerrosa@ongames.com",
-      "senha": "!SHCam0383"
+      "cpf": "452.526.408-07",
+      "nome": "Vitor Anderson Nathan Brito",
+      "email": "vitor_brito@w3ag.com",
+      "senha": "BWQkAYFjom",
+      "cep": "94410-440",
+      "numero":"251",
+      "complemento": "Centro"
+    },
+    {
+      "id": 4,
+      "cpf": "320.526.847-43",
+      "nome": "João Vinicius Rafael Nunes",
+      "email": "joaoviniciusnunes@gutembier.com.br",
+      "senha": "1OTKnIi5JG",
+      "cep": "69098-146",
+      "numero":"699",
+      "complemento": "Novo Aleixo"
+    },
+    {
+      "id": 5,
+      "cpf": "604.851.326-72",
+      "nome": "Cristiane Rita Eloá Ribeiro",
+      "email": "cristiane_rita_ribeiro@maccropropaganda.com.br",
+      "senha": "m94SWg5b6y",
+      "cep": "57082-890",
+      "numero":"953",
+      "complemento": "Santa Lúcia"
+    }
+  ],
+  "plataformas": [
+    {
+      "id": "1",
+      "nome": "Nintendo Switch"
+    },
+    {
+      "id": "2",
+      "nome": "Playstation 4"
+    },
+    {
+      "id": "3",
+      "nome": "Playstation 5"
+    },
+    {
+      "id": "4",
+      "nome": "Xbox One/X"
+    },
+    {
+      "id": "5",
+      "nome": "Xbox Series"
     }
   ]
 }
