@@ -9,8 +9,8 @@
         <router-link to="/funcionarios">Funcionários Crud</router-link> |
       </span>
       <span id="login" style="visibility: visible; display:inline;">
-        <a href="#" class="link-method" @click="login()">Login</a> |        
-        <router-link to="/cadastra">Cadastrar</router-link>
+        <a href="#" class="link-method" @click="login()">Login</a> |                
+        <router-link to="/cadastrar">Cadastrar</router-link>
       </span>
       <span id="logout" style="visibility: hidden; display:none;">
         <a href="#" class="link-method" @click="logout()">Logout</a>
