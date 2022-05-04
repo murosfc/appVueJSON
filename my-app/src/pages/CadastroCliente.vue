@@ -1,10 +1,6 @@
 <template>    
-  <v-card flat>
-    <v-snackbar v-model="snackbar" absolute top right color="success">
-      <span>Registration successful!</span>
-      <v-icon dark> mdi-checkbox-marked-circle </v-icon>
-    </v-snackbar>
-    <h2>{{title}}</h2>
+  <v-card flat>    
+    <h2>{{titulo}}</h2><br><br>
     <v-form ref="form" @submit.prevent="submit">
       <v-container fluid>
         <v-row>
@@ -138,14 +134,27 @@ export default {
         numero: "",
         complemento: "",
       },
-      emailVerificar: "",
-      editedIndex: -1,
+      senhaVerificar: "",      
       enderecoCorreios: [],
       rules: {
-        naoVazio: [(val) => (val || "").length > 0 || "This field is required"],
-        
+        naoVazio: [(val) => (val || "").length > 0 || "Preenchimento obrigatório"],  
+        emailRules: [v => !!v || 'Preenchimento obrigatório',
+          v => /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'E-mail inválido'],
+              
+
       },
     };
+  }, 
+  computed: {
+    formIsValid () {
+      return (
+        this.editedItem.cpf &&
+        this.editedItem.nome &&
+        this.editedItem.email &&
+        this.editedItem.senha &&
+        this.editedItem.cep &&
+        this.editedItem.numero
+      )},
   },
   methods: {
     carregaClientesCadastrados() {
@@ -154,7 +163,7 @@ export default {
           this.clientes = response.data;
         })
         .catch((error) => console.log(error));
-      return this.clientes.lenght;
+      return this.clientes.length;
     },
     getEnderecoCorreio(cep) {
       var url = "https://viacep.com.br/ws/" + cep + "/json/";
@@ -172,34 +181,36 @@ export default {
       }, 300);
     },
     submit() {
-      var novaId = this.carregaClientesCadastrados() + 1;
-      var cpfExiste = this.clientes.find(c => c.cpf === editedItem.cpf);
-      var emailExiste = this.clientes.find(c => c.email === editedItem.email);
-      if (cpfExiste.length > 0){
+      this.carregaClientesCadastrados()
+      var novaId =  0;
+      var cpfExiste = this.clientes.find(c => c.cpf === this.editedItem.cpf);
+      var emailExiste = this.clientes.find(c => c.email === this.editedItem.email);      
+      if (cpfExiste != null){
         alert("CPF já cadastrado");
       }
-      else if (emailExiste.length > 0 ){
+      else if (emailExiste != null ){
         alert("e-mail já cadastrado");
-      }
-      else{       
+      }      
+      else{
+        while (novaId < this.clientes.length){
+          novaId++;
+        }             
         this.editedItem.id = novaId;
-        if (this.editedIndex > -1) {
-          this.editedItem.senha = this.senhaInicial();
-          axios
-            .post("http://localhost:3000/clientes", this.editedItem)
-            .then((response) => {
-              console.log(response);
-              this.close();
-              alert("cadastrado com sucesso");
-              window.open("/home");
-            })
-            .catch((error) => console.log(error));
-        }
+        console.log(this.editedItem);
+        axios
+          .post("http://localhost:3000/clientes", this.editedItem)
+          .then((response) => {
+            console.log(response);
+            this.close();
+            alert("cadastrado com sucesso");
+            window.open("/home");
+          })
+          .catch((error) => console.log(error));        
       }
     },
     limpar() {
       this.editedItem = this.defaultItem;
-    },
+    },    
   },
 };
 </script>
