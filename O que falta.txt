@@ -1,0 +1,4 @@
+0 - Teste do cadastro do cliente;
+1 - Implementar a classe aluguel;
+2 - Salvar aluguel a partir do carrinho de compras;
+3 - Página para consulta de aluguéis.
