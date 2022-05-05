@@ -20,7 +20,7 @@
     <div class="d-block text-right" id="logado" style="visibility: hidden; display: none">
       <p>Bem vindo(a) {{dadosLogin.nome}}</p>   
     </div>
-    <template>
+   <!-- <template>
       <div>
         <v-modal v-model="modalShow">
           <v-text-field
@@ -39,7 +39,45 @@
         <v-button class="mt-2" variant="outline-warning" block @click="close()">Cancelar</v-button>  
         </v-modal>
       </div>
-    </template>
+    </template>-->
+    <v-row justify="center" data-app>
+          <v-dialog v-model="modalShow" max-width="700px" max-length="500px">
+            <v-card>
+            <v-card-title>
+                <span class="headline">Acesso ao sistema</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field
+                      v-model="acesso.login"
+                      label="Login"                                    
+                    ></v-text-field>                                                                                                
+                  </v-col> 
+                  <v-col cols="12" sm="6" md="6">
+                    <v-text-field
+                      type="password"
+                      v-model="acesso.senha"
+                      label="Senha"                                    
+                    ></v-text-field>                                                                                                
+                  </v-col>                         
+                </v-row>
+                </v-container>
+            </v-card-text>
+
+            <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="close()">
+                Cancelar
+                </v-btn>
+                <v-btn color="blue darken-1" text @click="entrar()">
+                Entrar
+                </v-btn>
+            </v-card-actions>
+            </v-card>
+        </v-dialog> 
+    </v-row>
   </div>  
 </template>
 
@@ -50,6 +88,10 @@ export default ({
    name: "NavHome",
   data: () => {
       return {
+        acesso: {
+          senha:'',
+          login:'',
+        },
         funcionarios: [],
         clientes: [],        
         session: {"funcionario": false, "cliente": false},
