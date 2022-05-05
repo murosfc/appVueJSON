@@ -6,7 +6,7 @@ import PlataformasCrud from '../pages/PlataformasCrud'
 import ClientesCrud from '../pages/ClientesCrud'
 import FuncionariosCrud from '../pages/FuncionariosCrud'
 import CadastroCliente from '../pages/CadastroCliente'
-import alugueis from '../pages/alugueis'
+import AlugueisView from '../pages/AlugueisView'
 
 Vue.use(VueRouter)
 
@@ -42,9 +42,9 @@ const routes = [
     component: CadastroCliente
   },
   {
-    path: '/alugueis',
+    path: '/AlugueisView',
     name: 'alugueis',
-    component: alugueis
+    component: AlugueisView
   }
 ]
 

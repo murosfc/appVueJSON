@@ -16,7 +16,7 @@
             <v-text-field
              v-model="editedItem.cpf"
               label="CPF"
-              :rules="rules.naoVazio"
+              :rules="rules.cpf"
               required >
             </v-text-field>
           </v-col>
@@ -24,7 +24,7 @@
             <v-text-field
               v-model="editedItem.email"
               label="e-mail"
-              :rules="rules.naoVazio"
+              :rules="rules.email"
               required 
             ></v-text-field>
           </v-col>
@@ -33,12 +33,10 @@
               type="password"
               v-model="editedItem.senha"
               label="Senha"
-              :rules="rules.naoVazio"
-              required 
+              :rules="rules.password"
+              required              
             ></v-text-field>
-          </v-col>
-          <span id="regra-senha"><small>O password precisa conter:
-            mínimo 6 e máximo 20 caracteres, pelo menos uma letra maiúscula, uma letra minúscula e um caractere especial.</small></span>
+          </v-col>         
           <v-col cols="12" sm="2">
             <v-text-field
               type="password"
@@ -62,6 +60,7 @@
               v-model="enderecoCorreios.logradouro"
               label="Rua"
               :disabled="cepNaoEcontrado"
+              :rules="rules.naoVazio"
               required 
             ></v-text-field>
           </v-col>
@@ -135,7 +134,7 @@ export default {
         senha: "",
         cep: "",
         numero: "",
-        complemeto: "",
+        complemento: "",
       },
       defaultItem: {
         id: "",
@@ -151,12 +150,11 @@ export default {
       senhaVerificar: "",      
       enderecoCorreios: [],
       rules: {
-        naoVazio: [(val) => (val || "").length > 0 || "Preenchimento obrigatório"],  
-        emailRules: [v => !!v || 'Preenchimento obrigatório',
-          v => /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'E-mail inválido'],
-        confirmPassword: [[[v => !!v || "Obrigatório confirmar senha"],
-        (this.editedItem.senha === this.senhaVerificar) || 'As senhas precisam ser iguais'], 
-        v => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{6,20}$/.test(v) || 'e-mail precisa serguir as regras de seguraça'],
+        naoVazio: [(val) => (val || "").length > 0 || "Preenchimento obrigatório"], 
+        cpf: [[(val) => (val || "").length > 0 || "Preenchimento obrigatório"], v => /^([0-9]{3}\.?[0-9]{3}\.?[0-9]{3}?[0-9]{2}|[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}?[0-9]{2})$/.test(v) || 'CPF inválido'], 
+        emailRules: [[(val) => (val || "").length > 0 || "Preenchimento obrigatório"], v => /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'E-mail inválido'],
+        password: [(val) => (val || "").length > 5 || 'Senha precisa ter no mínimo 6 caracteres'], 
+        confirmPassword: [[v => !!v || "Obrigatório confirmar senha"], v => !v == this.editedItem.senha || 'As senhas precisam ser iguais'],
       },
     };
   }, 
@@ -225,7 +223,7 @@ export default {
             console.log(response);
             this.close();
             alert("cadastrado com sucesso");
-            window.open("/home");
+            window.open("/");
           })
           .catch((error) => console.log(error));        
       }

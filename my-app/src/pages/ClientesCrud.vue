@@ -58,13 +58,7 @@
                                     v-model="editedItem.email"
                                     label="Email"
                                 ></v-text-field>                               
-                                </v-col>
-                                <v-col cols="12" sm="6" md="6">
-                                <v-text-field
-                                    v-model="editedItem.senha"
-                                    label="Senha"                                    
-                                ></v-text-field>                                                                                                
-                                </v-col>
+                                </v-col>                              
                                  <v-col cols="12" sm="6" md="6">
                                 <v-text-field
                                     v-model="editedItem.cep"
@@ -127,8 +121,7 @@ export default ({
                 {text: "Id", value: "id"},
                 {text: "CPF", value: "cpf"},
                 {text: "Nome", value: "nome"},
-                {text: "e-mail", value: "email"},
-                {text: "Senha", value: "senha"},
+                {text: "e-mail", value: "email"},                
                 {text: "CEP", value: "cep"},
                 {text: "Número", value: "numero"},
                 {text: "Complemento", value: "complemento"},

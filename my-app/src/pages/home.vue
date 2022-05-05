@@ -10,7 +10,7 @@
           height="150"
         />
       </v-col>
-    </v-row>
+    </v-row>    
     <v-row>
       <div class="cart">
         <label>Carrinho: </label>
@@ -88,7 +88,7 @@ export default ({
     name: "homePage",
     data: () => {
       return { 
-        title: "Bem vindo à Ongames, sua locadora digital de jogos",
+        title: "Ongames, sua locadora digital de jogos",
         headers: [                
           {text: "Título", value: "titulo"},
           {text: "Plataforma", value: "plataforma"},

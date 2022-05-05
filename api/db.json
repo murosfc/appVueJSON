@@ -50,21 +50,24 @@
       "nome": "Pedro da Silva",
       "nick": "theSniper",
       "whatsapp": "(22)9970-0002",
-      "email": "thesniper@ongames.com"
+      "email": "thesniper@ongames.com",
+      "senha": "23@Rfds31@"
     },
     {
       "id": "3",
       "nome": "Carlos Henrique Oliveira",
       "nick": "chclucher",
       "whatsapp": "(22)9970-0003",
-      "email": "chclucher@ongames.com"
+      "email": "chclucher@ongames.com",
+      "senha": "cH35sd!2$"
     },
     {
       "id": "4",
       "nome": "Camila Barros Prado",
       "nick": "camiCamper",
       "whatsapp": "(22)9970-0004",
-      "email": "camicamper@ongames.com"
+      "email": "camicamper@ongames.com",
+      "senha": "Cmm@454$ma"
     },
     {
       "id": "5",
@@ -154,7 +157,7 @@
       "id": "1",
       "id_cliente": "1",
       "id_jogo": "1",
-      "dataInicioAluguel":"22/01/2022",
+      "dataInicioAluguel": "22/01/2022",
       "dataFimAluguel": "22/02/2022",
       "id_funcionario": "1"
     },
@@ -162,7 +165,7 @@
       "id": "2",
       "id_cliente": "2",
       "id_jogo": "2",
-      "dataInicioAluguel":"22/02/2022",
+      "dataInicioAluguel": "22/02/2022",
       "dataFimAluguel": "22/03/2022",
       "id_funcionario": "1"
     },
@@ -170,7 +173,7 @@
       "id": "3",
       "id_cliente": "1",
       "id_jogo": "1",
-      "dataInicioAluguel":"22/01/2022",
+      "dataInicioAluguel": "22/01/2022",
       "dataFimAluguel": "22/04/2022",
       "id_funcionario": "1"
     },
@@ -178,7 +181,7 @@
       "id": "4",
       "id_cliente": "1",
       "id_jogo": "1",
-      "dataInicioAluguel":"01/05/2022",
+      "dataInicioAluguel": "01/05/2022",
       "dataFimAluguel": "21/09/2022",
       "id_funcionario": "1"
     },
@@ -186,7 +189,7 @@
       "id": "5",
       "id_cliente": "1",
       "id_jogo": "1",
-      "dataInicioAluguel":"01/06/2022",
+      "dataInicioAluguel": "01/06/2022",
       "dataFimAluguel": "22/12/2022",
       "id_funcionario": "1"
     }

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app">     
     <nav>
       <router-link to="/">Home</router-link> |
       <span id="adm" style="visibility: hidden; display:none;">
@@ -15,31 +15,12 @@
       <span id="logout" style="visibility: hidden; display:none;">
         <a href="#" class="link-method" @click="logout()">Logout</a>
       </span>
-    </nav>
-    <router-view/>
+    </nav>   
     <div class="d-block text-right" id="logado" style="visibility: hidden; display: none">
       <p>Bem vindo(a) {{dadosLogin.nome}}</p>   
     </div>
-   <!-- <template>
-      <div>
-        <v-modal v-model="modalShow">
-          <v-text-field
-              v-model="dadosLogin.email"
-              label="e-mail"
-              required
-              clearable                                    
-          ></v-text-field>
-          <v-text-field
-              v-model="dadosLogin.pass"
-              label="senha"
-              required 
-              clearable                                   
-          ></v-text-field>    
-        <v-button class="mt-3" variant="outline-danger" block @click="login()">Login</v-button>
-        <v-button class="mt-2" variant="outline-warning" block @click="close()">Cancelar</v-button>  
-        </v-modal>
-      </div>
-    </template>-->
+
+    <router-view/>    
     <v-row justify="center" data-app>
           <v-dialog v-model="modalShow" max-width="700px" max-length="500px">
             <v-card>
@@ -51,8 +32,8 @@
                 <v-row>
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field
-                      v-model="acesso.login"
-                      label="Login"                                    
+                      v-model="acesso.email"
+                      label="e-mail"                                    
                     ></v-text-field>                                                                                                
                   </v-col> 
                   <v-col cols="12" sm="6" md="6">
@@ -71,7 +52,7 @@
                 <v-btn color="blue darken-1" text @click="close()">
                 Cancelar
                 </v-btn>
-                <v-btn color="blue darken-1" text @click="entrar()">
+                <v-btn color="blue darken-1" text @click="login()">
                 Entrar
                 </v-btn>
             </v-card-actions>
@@ -90,12 +71,12 @@ export default ({
       return {
         acesso: {
           senha:'',
-          login:'',
+          email:'',
         },
+        modalShow: false,
         funcionarios: [],
         clientes: [],        
-        session: {"funcionario": false, "cliente": false},
-        modalShow: false,
+        session: {"funcionario": false, "cliente": false},        
         dadosLogin: {"email": "", "pass": "", "nome": "" },
         defaultDadosLogin: {"email": "", "pass": "", "nome": ""},    
       }
@@ -109,45 +90,55 @@ export default ({
         .catch((error)=> console.log(error)); 
         axios("http://localhost:3000/clientes")
         .then((response)=> {
-            this.funcionarios = response.data;                   
+            this.clientes = response.data;                   
         })                       
         .catch((error)=> console.log(error));                       
     },
     isCliente(){
-      var findCliente = this.clientes.find(c => c.email === this.dadosLogin.email);
-      if (findCliente.senha === this.dadosLogin.pass){
-        this.dadosLogin.nome = findCliente.nome;
+      var findCliente = this.clientes.find(c => c.email == this.acesso.email);      
+      if (typeof findCliente === 'undefined'){        
+        return false;
+      }
+      else if (findCliente.senha == this.acesso.senha){          
+          this.session.funcionario = false;
+          this.session.cliente = true;
+          this.dadosLogin.nome = findCliente.nome;
+          this.dadosLogin.pass = findCliente.senha;
+          this.dadosLogin.nome = findCliente.nome;
         return true;
       }
-      else return false;
+      return false;
     },
     isFuncionario(){
-      var findFuncionario = this.clientes.find(f => f.email === this.dadosLogin.email);
-      if (findFuncionario.senha === this.dadosLogin.pass){
-        this.defaultDadosLogin.nome = findFuncionario.nome;
-        return true;
+      var findFuncionario = this.funcionarios.find(f => f.email == this.acesso.email);                
+      if (typeof findFuncionario === 'undefined'){
+        return false;
       }
-      else return false;
+      else if (findFuncionario.senha == this.acesso.senha){          
+          this.session.cliente = false;
+          this.session.funcionario = true;
+          this.dadosLogin.nome = findFuncionario.nome;
+          this.dadosLogin.pass = findFuncionario.senha;
+          this.dadosLogin.nome = findFuncionario.nome;
+        return true;
+      }       
+      return false;
     },
     login(){  
-      if (this.isCliente()){
-        this.session.cliente = true;
-        this.session.funcionario = false;
-        this.modalShow = false;
+      if (this.isCliente()){               
         document.getElementById("logado").style.visibility = "visible";
-        document.getElementById("jogos-disponiveis").style.display = "block";        
+        document.getElementById("logado").style.display = "block";
+        this.modalShow = !this.modalShow;       
       }
-      else if(this.isFuncionario()){
-        this.session.funcionario = true;
-        this.session.cliente = false;        
-        this.modalShow=false;
+      else if(this.isFuncionario()){             
         document.getElementById("logado").style.visibility = "visible";
-        document.getElementById("jogos-disponiveis").style.display = "block";    
+        document.getElementById("logado").style.display = "block";
+        this.modalShow = !this.modalShow;           
       }
       else{
         alert("e-mail ou senha inválido");
-      }
-      this.updateLinks();        
+      } 
+      this.updateLinks();             
     },
     logout(){
       this.session.funcionario = false;
@@ -155,24 +146,25 @@ export default ({
       this.dadosLogin = this.defaultDadosLogin;
       this.updateLinks();
       document.getElementById("logado").style.visibility = "hidden";
-      document.getElementById("jogos-disponiveis").style.display = "none";  
+      document.getElementById("jogos-disponiveis").style.display = "none"; 
+      window.open("/"); 
     },
-    updateLinks(){
-      if (this.session.funcionario){       
+    updateLinks(){     
+      if (this.session.cliente){ 
+        document.getElementById("adm").style.visibility = "hidden";
+        document.getElementById("adm").style.display = "none";
+        document.getElementById("login").style.visibility = "visible";
+        document.getElementById("login").style.display = "inline";
+        document.getElementById("logout").style.visibility = "hidden";
+        document.getElementById("logout").style.display = "none";     
+      }
+      else{        
         document.getElementById("adm").style.visibility = "visible";
         document.getElementById("adm").style.display = "inline";
         document.getElementById("login").style.visibility = "hidden";
         document.getElementById("login").style.display = "none";
         document.getElementById("logout").style.visibility = "visible";
         document.getElementById("logout").style.display = "inline";
-      }
-      else{        
-        document.getElementById("adm").style.visibility = "hidden";
-        document.getElementById("adm").style.display = "none";
-        document.getElementById("login").style.visibility = "visible";
-        document.getElementById("login").style.display = "inline";
-        document.getElementById("logout").style.visibility = "hidden";
-        document.getElementById("logout").style.display = "none";
       }      
     },    
     close(){
