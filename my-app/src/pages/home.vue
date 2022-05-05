@@ -162,8 +162,30 @@ export default ({
         .catch((error) => console.log(error));      
       },
       defineFuncionario(){
-        //retornar funcionario com menor id e com menos aluguéis
-      }
+        var selectFunc = [];
+        var idFunc = 0;        
+        axios("http://localhost:3000/funcionarios")
+          .then((response)=> {
+            var countAlugueis = 0;             
+            for (var i=0; i < Object.keys(response.data).length;i++){
+              for (var j=0; j< this.alugueis.length;j++){
+                if(this.response.data[i].id === this.alugueis[j].id_funcionario){
+                  countAlugueis++;
+                }
+              }
+              selectFunc.push({"id": this.response.data[i].id, "qtAlugueis": countAlugueis});
+            }                             
+          })                       
+          .catch((error)=> console.log(error));
+        var menor = 10000000;
+        for (var i=0; i < selectFunc.length;i++){
+          if(selectFunc[i].qtAlugueis < menor){
+            idFunc = selectFunc[i].id;
+            menor = selectFunc[i].qtAlugueis;
+          }
+        }
+        return idFunc;  
+      },
       alugar(){
         if(!this.$parent.session.cliente){
           if(this.$parent.session.funcionario){
@@ -187,7 +209,24 @@ export default ({
           novoAluguel.dataInicioAluguel = dd + '/' + mm + '/' + yyyy;          
           novoAluguel.dataFimAluguel = (dd+7) + '/' + mm + '/' + yyyy;
           novoAluguel.id_funcionario = this.defineFuncionario();
-          //implementar id_jogos (precisa de nova tabela pra relacionar aluguel e jogos)
+          var novoJogoInAluguel = [];
+          for(var i=1;i<=this.cart.length;i++){
+            novoJogoInAluguel.push({"aluguel_id": novoAluguel.id, "jogo_id": this.cart[i].id});
+          }
+          axios
+            .post("http://localhost:3000/jogoInAluguel", novoJogoInAluguel)
+            .then((response) => {
+                console.log(response);          
+            })
+            .catch((error) => console.log(error));
+          axios
+            .post("http://localhost:3000/alugueis", novoAluguel)
+            .then((response) => {
+                console.log(response);          
+            })
+            .catch((error) => console.log(error));
+          alert ("Pedido numero " +novoAluguel.id+ " registrado com sucesso.\nVálido até "+novoAluguel.dataFimAluguel);
+          this.cart = [];
         }
       },
     },    

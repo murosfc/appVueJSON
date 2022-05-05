@@ -45,8 +45,7 @@ export default ({
             dialog: false,
             headers: [
                 {text: "Id", value: "id"},
-                {text: "Id do cliente", value: "id_cliente"},
-                {text: "Id do jogo", value: "id_jogo"},
+                {text: "Id do cliente", value: "id_cliente"},                
                 {text: "Data de início do aluguel", value: "dataInicioAluguel"},
                 {text: "Data de fim do aluguel", value: "dataFimAluguel"},
                 {text: "Id do funcionário", value: "id_funcionario"},
