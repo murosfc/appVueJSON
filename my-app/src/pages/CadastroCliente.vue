@@ -176,8 +176,7 @@ export default {
         .then((response) => {
           this.clientes = response.data;
         })
-        .catch((error) => console.log(error));
-      return this.clientes.length;
+        .catch((error) => console.log(error));      
     },
     getEnderecoCorreio(cep) {
       var url = "https://viacep.com.br/ws/" + cep + "/json/";
@@ -215,8 +214,7 @@ export default {
         while (novaId < this.clientes.length){
           novaId++;
         }             
-        this.editedItem.id = novaId;
-        console.log(this.editedItem);
+        this.editedItem.id = novaId;        
         axios
           .post("http://localhost:3000/clientes", this.editedItem)
           .then((response) => {

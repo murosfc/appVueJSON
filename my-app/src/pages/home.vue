@@ -67,7 +67,7 @@
           </v-row>          
           <v-row>
             <div id="btns-checkout">
-              <v-btn>
+              <v-btn @click="alugar()">
                 Alugar 
               </v-btn>            
               <v-btn @click="verSairCarrinho()">
@@ -97,7 +97,8 @@ export default ({
           {text: "Ações", value: "actions", sortable: false }                                
         ],
         jogos: [],
-        cart: [],               
+        cart: [], 
+        alugueis: [],              
        }
     },
     methods: {
@@ -152,7 +153,43 @@ export default ({
           }
         } 
         return false;          
+      },
+      carregaAlugueis(){
+        axios("http://localhost:3000/alugueis")
+        .then((response) => {
+          this.alugueis = response.data;
+        })
+        .catch((error) => console.log(error));      
+      },
+      defineFuncionario(){
+        //retornar funcionario com menor id e com menos aluguéis
       }
+      alugar(){
+        if(!this.$parent.session.cliente){
+          if(this.$parent.session.funcionario){
+            alert("Apenas clientes podem alugar jogos");
+          }
+          this.$parent.modalShow = !this.$parent.modalShow;
+        }
+        else{
+          this.carregaAlugueis()
+          var novaId =  0;
+          var novoAluguel = [];
+          while (novaId < this.alugueis.length){
+            novaId++;
+          }             
+          novoAluguel.id = novaId;
+          novoAluguel.id_cliente = this.$parent.dadosLogin.id;
+          var today = new Date();
+          var dd = String(today.getDate()).padStart(2, '0');
+          var mm = String(today.getMonth() + 1).padStart(2, '0'); //janeiro é 0
+          var yyyy = today.getFullYear();
+          novoAluguel.dataInicioAluguel = dd + '/' + mm + '/' + yyyy;          
+          novoAluguel.dataFimAluguel = (dd+7) + '/' + mm + '/' + yyyy;
+          novoAluguel.id_funcionario = this.defineFuncionario();
+          //implementar id_jogos (precisa de nova tabela pra relacionar aluguel e jogos)
+        }
+      },
     },    
     created() {
       this.inicializa();

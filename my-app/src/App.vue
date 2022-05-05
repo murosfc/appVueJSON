@@ -69,16 +69,13 @@ export default ({
    name: "NavHome",
   data: () => {
       return {
-        acesso: {
-          senha:'',
-          email:'',
-        },
+        acesso: {senha:'', email:''},        
         modalShow: false,
         funcionarios: [],
         clientes: [],        
         session: {"funcionario": false, "cliente": false},        
-        dadosLogin: {"email": "", "pass": "", "nome": "" },
-        defaultDadosLogin: {"email": "", "pass": "", "nome": ""},    
+        dadosLogin: {"id": 0, "email": "", "nome": "" },
+        defaultDadosLogin: {"id": 0, "email": "", "nome": ""},    
       }
   },
   methods: {
@@ -95,31 +92,31 @@ export default ({
         .catch((error)=> console.log(error));                       
     },
     isCliente(){
-      var findCliente = this.clientes.find(c => c.email == this.acesso.email);      
+      var findCliente = this.clientes.find(c => c.email === this.acesso.email);      
       if (typeof findCliente === 'undefined'){        
         return false;
       }
-      else if (findCliente.senha == this.acesso.senha){          
-          this.session.funcionario = false;
-          this.session.cliente = true;
-          this.dadosLogin.nome = findCliente.nome;
-          this.dadosLogin.pass = findCliente.senha;
-          this.dadosLogin.nome = findCliente.nome;
+      else if (findCliente.senha === this.acesso.senha){          
+        this.session.funcionario = false;
+        this.session.cliente = true;
+        this.dadosLogin.id = findCliente.id;
+        this.dadosLogin.nome = findCliente.nome;          
+        this.dadosLogin.email = findCliente.email;
         return true;
       }
       return false;
     },
     isFuncionario(){
-      var findFuncionario = this.funcionarios.find(f => f.email == this.acesso.email);                
+      var findFuncionario = this.funcionarios.find(f => f.email === this.acesso.email);                
       if (typeof findFuncionario === 'undefined'){
         return false;
       }
-      else if (findFuncionario.senha == this.acesso.senha){          
-          this.session.cliente = false;
-          this.session.funcionario = true;
-          this.dadosLogin.nome = findFuncionario.nome;
-          this.dadosLogin.pass = findFuncionario.senha;
-          this.dadosLogin.nome = findFuncionario.nome;
+      else if (findFuncionario.senha === this.acesso.senha){          
+        this.session.cliente = false;
+        this.session.funcionario = true;
+        this.dadosLogin.id = findFuncionario.id;
+        this.dadosLogin.nome = findFuncionario.nome;
+        this.dadosLogin.email = findFuncionario.email;          
         return true;
       }       
       return false;
@@ -143,7 +140,7 @@ export default ({
     logout(){
       this.session.funcionario = false;
       this.session.cliente = false;
-      this.dadosLogin = this.defaultDadosLogin;
+      this.dadosLogin = this.defaultDadosLogin;      
       this.updateLinks();
       document.getElementById("logado").style.visibility = "hidden";
       document.getElementById("jogos-disponiveis").style.display = "none"; 
