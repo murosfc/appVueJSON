@@ -153,29 +153,16 @@
     }
   ],
   "alugueis": [
-    [],
-    [
-      {
-        "id": 0,
-        "id_cliente": 0,
-        "dataInicioAluguel": "",
-        "dataFimAluguel": "",
-        "id_funcionario": 0
-      }
-    ]
+    {
+      "id": 1,
+      "id_cliente": 4,
+      "dataInicioAluguel": "06/05/2022",
+      "dataFimAluguel": "13/05/2022",
+      "id_funcionario": 1,
+      "valorTotal": 25.5
+    }
   ],
-  "jogoInAluguel": [
-    [
-      {
-        "aluguel_id": 3,
-        "jogo_id": 1
-      },
-      {
-        "aluguel_id": 3,
-        "jogo_id": 4
-      }
-    ],
-    [
+  "jogoInAluguel": [    
       {
         "aluguel_id": 1,
         "jogo_id": 1
@@ -184,6 +171,5 @@
         "aluguel_id": 1,
         "jogo_id": 4
       }
-    ]
-  ]
+  ]    
 }

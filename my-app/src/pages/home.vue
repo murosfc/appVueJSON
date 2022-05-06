@@ -194,7 +194,7 @@ export default ({
             .catch((error)=> console.log(error));         
           console.log(this.alugueis);    
           var novaId =  0;
-          var novoAluguel = [{"id": 0, "id_cliente": 0, "dataInicioAluguel": "", "dataFimAluguel": "","id_funcionario": 0}];
+          var novoAluguel = [{"id": 0, "id_cliente": 0, "dataInicioAluguel": "", "dataFimAluguel": "","id_funcionario": 0, "valorTotal": 0}];
           console.log("qt alugueis "+this.alugueis.length);
           do {
             novaId = novaId +1;
@@ -207,7 +207,8 @@ export default ({
           var yyyy = today.getFullYear();
           novoAluguel.dataInicioAluguel = dd + '/' + mm + '/' + yyyy;                  
           novoAluguel.dataFimAluguel = (parseInt(dd)+7) + '/' + mm + '/' + yyyy;         
-          novoAluguel.id_funcionario = this.defineFuncionario();         
+          novoAluguel.id_funcionario = this.defineFuncionario(); 
+          novoAluguel.valorTotal = this.updateTotal();        
           var novoJogoInAluguel = [];
           for(var i=0;i<this.cart.length;i++){
             novoJogoInAluguel.push({"aluguel_id": novoAluguel.id, "jogo_id": this.cart[i].id});

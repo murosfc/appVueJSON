@@ -5,13 +5,13 @@
                 <h1>{{titulo}}</h1>
             </v-col>      
         </v-row>
-        <v-row class="table-clientes">
+        <v-row class="table-alugueis">
             <v-col cols="12">
                 <v-data-table dense :headers="headers" :items="alugueis" item-key="id" class="elevation-1">                          
                  ##Formulario
                 <template v-slot:top>
                     <v-toolbar flat>
-                    <v-toolbar-title>Clientes cadastrados</v-toolbar-title>
+                    <v-toolbar-title>Alugueis</v-toolbar-title>
                     <v-divider class="mx-4" inset vertical></v-divider>                    
                     <v-spacer></v-spacer>
                     </v-toolbar>
@@ -49,11 +49,9 @@ export default ({
                 {text: "Data de início do aluguel", value: "dataInicioAluguel"},
                 {text: "Data de fim do aluguel", value: "dataFimAluguel"},
                 {text: "Id do funcionário", value: "id_funcionario"},
+                {text: "Valor aluguel", value: "valorTotal"},
             ],
-            alugueis: [],                       
-            editedItem: {id: "", cpf: "", nome: "", email: "", senha: "", cep: "", numero:"", complemeto:""},
-            defaultItem: {id: "", cpf: "", nome: "", email: "", senha: "", cep: "", numero:"", complemeto:""},
-            editedIndex: -1,           
+            alugueis: [],                 
         }           
     },
     methods: {
