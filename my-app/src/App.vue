@@ -150,10 +150,10 @@ export default ({
       if (this.session.cliente){ 
         document.getElementById("adm").style.visibility = "hidden";
         document.getElementById("adm").style.display = "none";
-        document.getElementById("login").style.visibility = "visible";
-        document.getElementById("login").style.display = "inline";
-        document.getElementById("logout").style.visibility = "hidden";
-        document.getElementById("logout").style.display = "none";     
+        document.getElementById("login").style.visibility = "hidden";
+        document.getElementById("login").style.display = "none";
+        document.getElementById("logout").style.visibility = "visible";
+        document.getElementById("logout").style.display = "inline";     
       }
       else{        
         document.getElementById("adm").style.visibility = "visible";
@@ -161,7 +161,7 @@ export default ({
         document.getElementById("login").style.visibility = "hidden";
         document.getElementById("login").style.display = "none";
         document.getElementById("logout").style.visibility = "visible";
-        document.getElementById("logout").style.display = "inline";
+        document.getElementById("logout").style.display = "inline";   
       }      
     },    
     close(){

@@ -153,27 +153,20 @@ export default ({
           }
         } 
         return false;          
-      },
-      carregaAlugueis(){
-        axios("http://localhost:3000/alugueis")
-        .then((response) => {
-          this.alugueis = response.data;
-        })
-        .catch((error) => console.log(error));      
-      },
+      },       
       defineFuncionario(){
-        var selectFunc = [];
+        var selectFunc = [];        
         var idFunc = 0;        
         axios("http://localhost:3000/funcionarios")
           .then((response)=> {
-            var countAlugueis = 0;             
+            var countAlugueis = 0;                       
             for (var i=0; i < Object.keys(response.data).length;i++){
-              for (var j=0; j< this.alugueis.length;j++){
-                if(this.response.data[i].id === this.alugueis[j].id_funcionario){
+              for (var j=0; j< this.alugueis.length; j++){
+                if(response.data[i].id === this.alugueis[j].id_funcionario){
                   countAlugueis++;
                 }
               }
-              selectFunc.push({"id": this.response.data[i].id, "qtAlugueis": countAlugueis});
+              selectFunc.push({"id": response.data[i].id, "qtAlugueis": countAlugueis});
             }                             
           })                       
           .catch((error)=> console.log(error));
@@ -194,25 +187,31 @@ export default ({
           this.$parent.modalShow = !this.$parent.modalShow;
         }
         else{
-          this.carregaAlugueis()
+          axios("http://localhost:3000/alugueis")
+            .then((response)=> {
+                this.alugueis = response.data;                             
+            })                       
+            .catch((error)=> console.log(error));         
+          console.log(this.alugueis);    
           var novaId =  0;
-          var novoAluguel = [];
-          while (novaId < this.alugueis.length){
-            novaId++;
-          }             
-          novoAluguel.id = novaId;
-          novoAluguel.id_cliente = this.$parent.dadosLogin.id;
+          var novoAluguel = [{"id": 0, "id_cliente": 0, "dataInicioAluguel": "", "dataFimAluguel": "","id_funcionario": 0}];
+          console.log("qt alugueis "+this.alugueis.length);
+          do {
+            novaId = novaId +1;
+          } while (novaId < this.alugueis.length);               
+          novoAluguel.id = novaId;          
+          novoAluguel.id_cliente = this.$parent.dadosLogin.id;          
           var today = new Date();
           var dd = String(today.getDate()).padStart(2, '0');
           var mm = String(today.getMonth() + 1).padStart(2, '0'); //janeiro é 0
           var yyyy = today.getFullYear();
-          novoAluguel.dataInicioAluguel = dd + '/' + mm + '/' + yyyy;          
-          novoAluguel.dataFimAluguel = (dd+7) + '/' + mm + '/' + yyyy;
-          novoAluguel.id_funcionario = this.defineFuncionario();
+          novoAluguel.dataInicioAluguel = dd + '/' + mm + '/' + yyyy;                  
+          novoAluguel.dataFimAluguel = (parseInt(dd)+7) + '/' + mm + '/' + yyyy;         
+          novoAluguel.id_funcionario = this.defineFuncionario();         
           var novoJogoInAluguel = [];
-          for(var i=1;i<=this.cart.length;i++){
+          for(var i=0;i<this.cart.length;i++){
             novoJogoInAluguel.push({"aluguel_id": novoAluguel.id, "jogo_id": this.cart[i].id});
-          }
+          }                    
           axios
             .post("http://localhost:3000/jogoInAluguel", novoJogoInAluguel)
             .then((response) => {
