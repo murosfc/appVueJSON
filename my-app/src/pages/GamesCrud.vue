@@ -47,7 +47,8 @@
                                 <v-col cols="12" sm="6" md="2">
                                 <v-text-field
                                     v-model="editedItem.id"
-                                    label="Id"                                    
+                                    label="Id"  
+                                    disabled                                                                    
                                 ></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="8">
@@ -131,10 +132,11 @@ export default ({
                 {text: "Ações", value: "actions", sortable: false }                
             ],
             jogos: [],                       
-            editedItem: {id: "", titulo: "", plataforma: "", urlimg: "", valor: 20},
-            defaultItem: {id: "", titulo: "", plataforma: "", urlimg: "", valor: 20},
+            editedItem: {id: null, titulo: "", plataforma: "", urlimg: "", valor: 20},
+            defaultItem: {id: null, titulo: "", plataforma: "", urlimg: "", valor: 20},
             editedIndex: -1,
             plataformas: [],
+            jogoInAluguel: [],
         }           
     },
     methods: {
@@ -152,7 +154,12 @@ export default ({
                 } 
                 console.log(this.plataformas);                                   
             })                       
-            .catch((error)=> console.log(error));             
+            .catch((error)=> console.log(error));
+             axios("http://localhost:3000/jogoInAluguel")
+            .then((response)=> {
+                this.jogoInAluguel = response.data;                             
+            })                       
+            .catch((error)=> console.log(error));               
         },
         close(){
             this.dialog = false
@@ -161,7 +168,7 @@ export default ({
                 this.editedIndex = -1;                
             }, 300);
         },
-        save() {
+        save() {            
             if (this.editedIndex > -1) {
                 //alteracao
                 axios
@@ -170,19 +177,21 @@ export default ({
                     this.editedItem
                 )
                 .then((response) => {
-                    console.log(response);
+                    this.editedItem = response.data;
                     Object.assign(this.jogos[this.editedIndex], this.editedItem);
                     this.close();
                 })
                 .catch((error) => console.log(error));
             } else {
                 //Inclusao
+                this.editedItem.id = null;
                 axios
-                .post("http://localhost:3000/jogos", this.editedItem)
+                .post("http://localhost:3000/games", this.editedItem)
                 .then((response) => {
-                    console.log(response);
+                    this.editedItem = response.data;
                     this.jogos.push(this.editedItem);
                     this.close();
+                    window.open("/games", '_self');
                 })
                 .catch((error) => console.log(error));
             }         
@@ -194,14 +203,20 @@ export default ({
         },
         deleteItem(item) {
         const index = this.jogos.indexOf(item);
-        confirm("Deseja apagar este item de id ?" + item.id) &&
-            axios
-            .delete("http://localhost:3000/games/" + item.id)
-            .then((response) => {
-                console.log(response.data);
-                this.games.splice(index, 1);                
-            })
-            .catch((error) => console.log(error));
+        var temAluguel = this.jogoInAluguel.find( j => j.jogo_id == item.id);
+        if (temAluguel != null){
+            alert("Este jogo está vinculado a um aluguel e não pode ser excluído!");
+        }
+        else{
+            confirm("Deseja apagar este item de id ?" + item.id) &&
+                axios
+                .delete("http://localhost:3000/games/" + item.id)
+                .then((response) => {
+                    console.log(response.data);
+                    this.games.splice(index, 1);                
+                })
+                .catch((error) => console.log(error));
+            }
         } ,
         limpar(){
             this.editedItem.urlimg = "";

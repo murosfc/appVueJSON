@@ -143,27 +143,27 @@ export default ({
       }                   
     },
     logout(){
+      window.open("/", '_blank');
       this.session.funcionario = false;
       this.session.cliente = false;
       this.dadosLogin = this.defaultDadosLogin;      
       this.updateLinks();
       document.getElementById("logado").style.visibility = "hidden";
       document.getElementById("logado").style.display = "none";      
-      document.getElementById("jogos-disponiveis").style.display = "none"; 
-      window.open("/", "_self"); 
+      document.getElementById("jogos-disponiveis").style.display = "none";       
     },
     updateLinks(){     
-      if (this.session.cliente){ 
-        document.getElementById("adm").style.visibility = "hidden";
-        document.getElementById("adm").style.display = "none";
+      if (this.session.funcionario){
+        document.getElementById("adm").style.visibility = "visible";
+        document.getElementById("adm").style.display = "inline";
         document.getElementById("login").style.visibility = "hidden";
         document.getElementById("login").style.display = "none";
         document.getElementById("logout").style.visibility = "visible";
-        document.getElementById("logout").style.display = "inline";     
+        document.getElementById("logout").style.display = "inline";           
       }
-      else{        
-        document.getElementById("adm").style.visibility = "visible";
-        document.getElementById("adm").style.display = "inline";
+      else {        
+        document.getElementById("adm").style.visibility = "hidden";
+        document.getElementById("adm").style.display = "none";
         document.getElementById("login").style.visibility = "hidden";
         document.getElementById("login").style.display = "none";
         document.getElementById("logout").style.visibility = "visible";

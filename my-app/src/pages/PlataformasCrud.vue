@@ -40,7 +40,8 @@
                                     <v-col cols="12" sm="6" md="2">
                                     <v-text-field
                                         v-model="editedItem.id"
-                                        label="Id"                                    
+                                        label="Id" 
+                                        disabled                                   
                                     ></v-text-field>
                                     </v-col>
                                     <v-col cols="12" sm="6" md="8">
@@ -102,7 +103,7 @@ export default ({
             plataformas: [],                    
             editedItem: {id: "", nome: ""},
             defaultItem: {id: "", nome: ""},
-            editedIndex: -1            
+            editedIndex: -1,                     
         }           
     },
     methods: {
@@ -111,7 +112,7 @@ export default ({
             .then((response)=> {
                 this.plataformas = response.data;                             
             })                       
-            .catch((error)=> console.log(error));             
+            .catch((error)=> console.log(error));                         
         },
         close(){
             this.dialog = false
@@ -129,17 +130,18 @@ export default ({
                     this.editedItem
                 )
                 .then((response) => { 
-                    console.log(response);                  
+                    this.editedItem = response.data;                   
                     Object.assign(this.plataformas[this.editedIndex], this.editedItem);
                     this.close();
                 })
                 .catch((error) => console.log(error));
             } else {
                 //Inclusao
+                this.editedItem.id=null;
                 axios
                 .post("http://localhost:3000/plataformas", this.editedItem)
                 .then((response) => {
-                    console.log(response);                   
+                    this.editedItem = response.data;                   
                     this.plataformas.push(this.editedItem);
                     this.close();
                 })
@@ -152,7 +154,7 @@ export default ({
         this.dialog = true;
         },
         deleteItem(item) {
-        const index = this.plataformas.indexOf(item);        
+        const index = this.plataformas.indexOf(item);            
         confirm("Deseja apagar o item de id "+  item.id +"?") &&
             axios
             .delete("http://localhost:3000/plataformas/" + item.id)

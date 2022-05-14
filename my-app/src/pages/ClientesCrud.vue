@@ -40,7 +40,8 @@
                                 <v-col cols="12" sm="6" md="2">
                                 <v-text-field
                                     v-model="editedItem.id"
-                                    label="Id"                                    
+                                    label="Id" 
+                                    disabled                                   
                                 ></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="8">
@@ -131,7 +132,8 @@ export default ({
             clientes: [],                       
             editedItem: {id: "", cpf: "", nome: "", email: "", senha: "", cep: "", numero:"", complemeto:""},
             defaultItem: {id: "", cpf: "", nome: "", email: "", senha: "", cep: "", numero:"", complemeto:""},
-            editedIndex: -1,           
+            editedIndex: -1, 
+            alugueis: []          
         }           
     },
     methods: {
@@ -139,6 +141,11 @@ export default ({
             axios("http://localhost:3000/clientes")
             .then((response)=> {
                 this.clientes = response.data;                             
+            })                       
+            .catch((error)=> console.log(error));
+            axios("http://localhost:3000/alugueis")
+            .then((response)=> {
+                this.alugueis = response.data;                             
             })                       
             .catch((error)=> console.log(error));             
         },
@@ -158,18 +165,19 @@ export default ({
                     this.editedItem
                 )
                 .then((response) => {
-                    console.log(response);
+                    this.editItem = response.data;
                     Object.assign(this.clientes[this.editedIndex], this.editedItem);
                     this.close();
                 })
                 .catch((error) => console.log(error));
             } else {
                 //Inclusao
+                this.editedItem.id=null;
                 this.editedItem.senha = this.senhaInicial();
                 axios
                 .post("http://localhost:3000/clientes", this.editedItem)
                 .then((response) => {
-                    console.log(response);
+                    this.editItem = response.data;
                     this.clientes.push(this.editedItem);
                     this.close();
                 })
@@ -183,14 +191,20 @@ export default ({
         },
         deleteItem(item) {
         const index = this.clientes.indexOf(item);
-        confirm("Deseja apagar este item de id ?" + item.id) &&
-            axios
-            .delete("http://localhost:3000/clientes/" + item.id)
-            .then((response) => {
-                console.log(response.data);
-                this.clientes.splice(index, 1);                
-            })
-            .catch((error) => console.log(error));
+        var temAluguel = this.alugueis.find( a => a.id_cliente == item.id);
+        if (temAluguel != null){
+            alert("Este cliente possui aluguel registrado e não pode ser excluído!");
+        }
+        else{
+            confirm("Deseja apagar este item de id ?" + item.id) &&
+                axios
+                .delete("http://localhost:3000/clientes/" + item.id)
+                .then((response) => {
+                    console.log(response.data);
+                    this.clientes.splice(index, 1);                
+                })
+                .catch((error) => console.log(error));
+        }
         } ,
         senhaInicial() {
             var tamanho = 8;

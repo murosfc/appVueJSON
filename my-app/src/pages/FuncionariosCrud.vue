@@ -40,7 +40,8 @@
                                 <v-col cols="12" sm="6" md="2">
                                 <v-text-field
                                     v-model="editedItem.id"
-                                    label="Id"                                    
+                                    label="Id" 
+                                    disabled                                   
                                 ></v-text-field>
                                 </v-col>
                                 <v-col cols="12" sm="6" md="8">
@@ -122,7 +123,8 @@ export default ({
             funcionarios: [],                       
             editedItem: {id: "", nome: "", nick: "", whatsapp: "(22)9970-00", email: "@ongames.com"},
             defaultItem: {id: "", nome: "", nick: "", whatsapp: "(22)9970-00", email: "@ongames.com"},
-            editedIndex: -1,           
+            editedIndex: -1,
+            alugueis: [],           
         }           
     },
     methods: {
@@ -131,7 +133,12 @@ export default ({
             .then((response)=> {
                 this.funcionarios = response.data;                             
             })                       
-            .catch((error)=> console.log(error));             
+            .catch((error)=> console.log(error)); 
+            axios("http://localhost:3000/alugueis")
+            .then((response)=> {
+                this.alugueis = response.data;                             
+            })                       
+            .catch((error)=> console.log(error));            
         },
         close(){
             this.dialog = false
@@ -149,18 +156,19 @@ export default ({
                     this.editedItem
                 )
                 .then((response) => {
-                    console.log(response);
+                    this.editedItem = response.data;
                     Object.assign(this.funcionarios[this.editedIndex], this.editedItem);
                     this.close();
                 })
                 .catch((error) => console.log(error));
             } else {
                 //Inclusao
+                this.editedItem.id=null;
                 this.editedItem.senha = this.senhaInicial();
                 axios
                 .post("http://localhost:3000/funcionarios", this.editedItem)
                 .then((response) => {
-                    console.log(response);
+                    this.editedItem = response.data;
                     this.funcionarios.push(this.editedItem);
                     this.close();
                 })
@@ -174,14 +182,20 @@ export default ({
         },
         deleteItem(item) {
         const index = this.funcionarios.indexOf(item);
-        confirm("Deseja apagar este item de id ?" + item.id) &&
-            axios
-            .delete("http://localhost:3000/funcionarios/" + item.id)
-            .then((response) => {
-                console.log(response.data);
-                this.funcionarios.splice(index, 1);                
-            })
-            .catch((error) => console.log(error));
+        var temAluguel = this.alugueis.find( a => a.id_funcionario == item.id);
+        if (temAluguel != null){
+            alert("Este funcioário possui aluguel registrado e não pode ser excluído!");
+        }
+        else{            
+            confirm("Deseja apagar este item de id ?" + item.id) &&
+                axios
+                .delete("http://localhost:3000/funcionarios/" + item.id)
+                .then((response) => {
+                    console.log(response.data);
+                    this.funcionarios.splice(index, 1);                
+                })
+                .catch((error) => console.log(error));
+        }
         } ,
         senhaInicial() {
             var tamanho = 8;

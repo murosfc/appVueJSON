@@ -200,8 +200,7 @@ export default {
       }, 300);
     },
     submit() {
-      this.carregaClientesCadastrados()
-      var novaId =  0;
+      this.carregaClientesCadastrados();      
       var cpfExiste = this.clientes.find(c => c.cpf === this.editedItem.cpf);
       var emailExiste = this.clientes.find(c => c.email === this.editedItem.email);      
       if (cpfExiste != null){
@@ -210,15 +209,12 @@ export default {
       else if (emailExiste != null ){
         alert("e-mail já cadastrado");
       }      
-      else{
-        while (novaId < this.clientes.length){
-          novaId++;
-        }             
-        this.editedItem.id = novaId;        
+      else{                     
+        this.editedItem.id = null;        
         axios
           .post("http://localhost:3000/clientes", this.editedItem)
           .then((response) => {
-            console.log(response);
+            this.editedItem = response.data;
             this.close();
             alert("cadastrado com sucesso");
             window.open("/");
