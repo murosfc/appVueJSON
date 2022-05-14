@@ -7,18 +7,20 @@
         <router-link to="/plataformas">Plataformas Crud</router-link> |
         <router-link to="/clientes">Clientes Crud</router-link> |
         <router-link to="/funcionarios">Funcionários Crud</router-link> |
+        <router-link to="/alugueis">Alugueis</router-link> |               
       </span>
       <span id="login" style="visibility: visible; display:inline;">
         <a href="#" class="link-method" @click="modalShow = !modalShow">Login</a> |                
         <router-link to="/cadastrar">Cadastrar</router-link>
       </span>
-      <span id="logout" style="visibility: hidden; display:none;">
+      <span id="logout" style="visibility: hidden; display:none;"> 
+        <router-link to="/meusalugueis">Meus Alugueis</router-link> |       
         <a href="#" class="link-method" @click="logout()">Logout</a>
       </span>
     </nav>   
     <div class="d-block text-right" id="logado" style="visibility: hidden; display: none">
       <p>Bem vindo(a) {{dadosLogin.nome}}</p>   
-    </div>
+    </div>   
 
     <router-view/>    
     <v-row justify="center" data-app>
@@ -33,15 +35,17 @@
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field
                       v-model="acesso.email"
-                      label="e-mail"                                    
-                    ></v-text-field>                                                                                                
+                      label="e-mail"                                                          
+                    >
+                    </v-text-field>                                                                                                
                   </v-col> 
                   <v-col cols="12" sm="6" md="6">
                     <v-text-field
                       type="password"
                       v-model="acesso.senha"
                       label="Senha"                                    
-                    ></v-text-field>                                                                                                
+                    >
+                    </v-text-field>                                                                                                
                   </v-col>                         
                 </v-row>
                 </v-container>
@@ -125,17 +129,18 @@ export default ({
       if (this.isCliente()){               
         document.getElementById("logado").style.visibility = "visible";
         document.getElementById("logado").style.display = "block";
-        this.modalShow = !this.modalShow;       
+        this.modalShow = !this.modalShow;
+        this.updateLinks();        
       }
       else if(this.isFuncionario()){             
         document.getElementById("logado").style.visibility = "visible";
         document.getElementById("logado").style.display = "block";
-        this.modalShow = !this.modalShow;           
+        this.modalShow = !this.modalShow;
+        this.updateLinks();            
       }
       else{
         alert("e-mail ou senha inválido");
-      } 
-      this.updateLinks();             
+      }                   
     },
     logout(){
       this.session.funcionario = false;
@@ -143,8 +148,9 @@ export default ({
       this.dadosLogin = this.defaultDadosLogin;      
       this.updateLinks();
       document.getElementById("logado").style.visibility = "hidden";
+      document.getElementById("logado").style.display = "none";      
       document.getElementById("jogos-disponiveis").style.display = "none"; 
-      window.open("/"); 
+      window.open("/", "_self"); 
     },
     updateLinks(){     
       if (this.session.cliente){ 

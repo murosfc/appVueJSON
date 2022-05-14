@@ -40,9 +40,9 @@
         </div>
       </div> 
     </template> 
-     <template>
-      <h2 id="carrinho-vazio" style="visibility: hidden; display: none;">Carrinho vazio</h2>
+     <template>      
       <div class="flex-container" id="carrinho-cliente" style="visibility: hidden; display: none;">
+      <h2 id="carrinho-vazio" style="visibility: hidden; display: none;">Carrinho vazio</h2>
          <v-row>
             <v-col cols="12">
               <v-data-table dense :headers="headers" :items="cart" item-key="id" class="elevation-1">  
@@ -98,7 +98,8 @@ export default ({
         ],
         jogos: [],
         cart: [], 
-        alugueis: [],              
+        alugueis: [], 
+        funcionarios: []                    
        }
     },
     methods: {
@@ -107,7 +108,17 @@ export default ({
         .then((response)=> {
             this.jogos = response.data;                   
         })                       
-        .catch((error)=> console.log(error));                        
+        .catch((error)=> console.log(error)); 
+        axios("http://localhost:3000/alugueis")
+            .then((response)=> {
+                this.alugueis = response.data;                                         
+            })                       
+            .catch((error)=> console.log(error)); 
+        axios("http://localhost:3000/funcionarios")
+          .then((response)=> {
+            this.funcionarios = response.data;
+          })
+          .catch((error)=> console.log(error));
       },
       addCart(jogo){         
         this.cart.push(Object.assign({}, jogo));          
@@ -156,28 +167,26 @@ export default ({
       },       
       defineFuncionario(){
         var selectFunc = [];        
-        var idFunc = 0;        
-        axios("http://localhost:3000/funcionarios")
-          .then((response)=> {
-            var countAlugueis = 0;                       
-            for (var i=0; i < Object.keys(response.data).length;i++){
-              for (var j=0; j< this.alugueis.length; j++){
-                if(response.data[i].id === this.alugueis[j].id_funcionario){
-                  countAlugueis++;
-                }
-              }
-              selectFunc.push({"id": response.data[i].id, "qtAlugueis": countAlugueis});
-            }                             
-          })                       
-          .catch((error)=> console.log(error));
+        var idFunc = 1;                              
+        for (var i=0; i < this.funcionarios.length;i++){
+          var countAlugueis = 0;
+          for (var j=0; j< this.alugueis.length; j++){
+            if(this.funcionarios[i].id == this.alugueis[j].id_funcionario){
+              countAlugueis++;
+            }
+          }
+          selectFunc.push({"id": parseInt(this.funcionarios[i].id), "qtAlugueis": parseInt(countAlugueis)});
+        }  
         var menor = 10000000;
-        for (var i=0; i < selectFunc.length;i++){
+        console.log(selectFunc);
+        for (i=0; i < selectFunc.length; i++){
           if(selectFunc[i].qtAlugueis < menor){
             idFunc = selectFunc[i].id;
             menor = selectFunc[i].qtAlugueis;
           }
+          console.log("iteração "+i+" idFunc: "+selectFunc[i].id+" alugueis: "+selectFunc[i].qtAlugueis+" menor: "+menor);
         }
-        return idFunc;  
+        return idFunc;     
       },
       alugar(){
         if(!this.$parent.session.cliente){
@@ -186,47 +195,39 @@ export default ({
           }
           this.$parent.modalShow = !this.$parent.modalShow;
         }
-        else{
+        else{                  
           axios("http://localhost:3000/alugueis")
             .then((response)=> {
-                this.alugueis = response.data;                             
+                this.alugueis = response.data;                                         
             })                       
-            .catch((error)=> console.log(error));         
-          console.log(this.alugueis);    
-          var novaId =  0;
-          var novoAluguel = [{"id": 0, "id_cliente": 0, "dataInicioAluguel": "", "dataFimAluguel": "","id_funcionario": 0, "valorTotal": 0}];
-          console.log("qt alugueis "+this.alugueis.length);
-          do {
-            novaId = novaId +1;
-          } while (novaId < this.alugueis.length);               
-          novoAluguel.id = novaId;          
-          novoAluguel.id_cliente = this.$parent.dadosLogin.id;          
+            .catch((error)=> console.log(error));                          
+          var id_cliente = this.$parent.dadosLogin.id;          
           var today = new Date();
           var dd = String(today.getDate()).padStart(2, '0');
           var mm = String(today.getMonth() + 1).padStart(2, '0'); //janeiro é 0
           var yyyy = today.getFullYear();
-          novoAluguel.dataInicioAluguel = dd + '/' + mm + '/' + yyyy;                  
-          novoAluguel.dataFimAluguel = (parseInt(dd)+7) + '/' + mm + '/' + yyyy;         
-          novoAluguel.id_funcionario = this.defineFuncionario(); 
-          novoAluguel.valorTotal = this.updateTotal();        
-          var novoJogoInAluguel = [];
-          for(var i=0;i<this.cart.length;i++){
-            novoJogoInAluguel.push({"aluguel_id": novoAluguel.id, "jogo_id": this.cart[i].id});
-          }                    
-          axios
-            .post("http://localhost:3000/jogoInAluguel", novoJogoInAluguel)
-            .then((response) => {
-                console.log(response);          
-            })
-            .catch((error) => console.log(error));
+          var dataInicioAluguel = dd + '/' + mm + '/' + yyyy;                  
+          var dataFimAluguel = (parseInt(dd)+7) + '/' + mm + '/' + yyyy;         
+          var id_funcionario = this.defineFuncionario(); 
+          var valorTotal = this.updateTotal(); 
+          var novoAluguel = {"id": null, "id_cliente": id_cliente, "dataInicioAluguel": dataInicioAluguel, "dataFimAluguel": dataFimAluguel,"id_funcionario": id_funcionario, "valorTotal": valorTotal};        
+          
           axios
             .post("http://localhost:3000/alugueis", novoAluguel)
             .then((response) => {
-                console.log(response);          
+              for(var i=0;i<this.cart.length;i++){                
+                var novoJogoInAluguel = {"aluguel_id": parseInt(response.data.id), "jogo_id": parseInt(this.cart[i].id)} ;
+                axios
+                .post("http://localhost:3000/jogoInAluguel", novoJogoInAluguel)
+                .then((response) => {
+                    console.log(response);          
+                })
+                .catch((error) => console.log(error));
+              }    
+              alert ("Novo aluguel registrado com sucesso.\nVálido até "+novoAluguel.dataFimAluguel);
+              this.cart = [];                                    
             })
-            .catch((error) => console.log(error));
-          alert ("Pedido numero " +novoAluguel.id+ " registrado com sucesso.\nVálido até "+novoAluguel.dataFimAluguel);
-          this.cart = [];
+            .catch((error) => console.log(error));          
         }
       },
     },    

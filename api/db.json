@@ -155,21 +155,80 @@
   "alugueis": [
     {
       "id": 1,
-      "id_cliente": 4,
-      "dataInicioAluguel": "06/05/2022",
-      "dataFimAluguel": "13/05/2022",
+      "id_cliente": 2,
+      "dataInicioAluguel": "13/05/2022",
+      "dataFimAluguel": "20/05/2022",
       "id_funcionario": 1,
       "valorTotal": 25.5
+    },
+    {
+      "id": 2,
+      "id_cliente": 5,
+      "dataInicioAluguel": "13/05/2022",
+      "dataFimAluguel": "20/05/2022",
+      "id_funcionario": "2",
+      "valorTotal": 40
+    },
+    {
+      "id": 3,
+      "id_cliente": 3,
+      "dataInicioAluguel": "13/05/2022",
+      "dataFimAluguel": "20/05/2022",
+      "id_funcionario": 3,
+      "valorTotal": 20
+    },
+    {
+      "id": 4,
+      "id_cliente": 4,
+      "dataInicioAluguel": "13/05/2022",
+      "dataFimAluguel": "20/05/2022",
+      "id_funcionario": 4,
+      "valorTotal": 15.5
+    },
+    {
+      "id": 5,
+      "id_cliente": 5,
+      "dataInicioAluguel": "13/05/2022",
+      "dataFimAluguel": "20/05/2022",
+      "id_funcionario": 5,
+      "valorTotal": 20
     }
   ],
-  "jogoInAluguel": [    
-      {
-        "aluguel_id": 1,
-        "jogo_id": 1
-      },
-      {
-        "aluguel_id": 1,
-        "jogo_id": 4
-      }
-  ]    
+  "jogoInAluguel": [
+    {
+      "aluguel_id": 1,
+      "jogo_id": 1,
+      "id": 1
+    },
+    {
+      "aluguel_id": 1,
+      "jogo_id": 4,
+      "id": 2
+    },
+    {
+      "aluguel_id": 2,
+      "jogo_id": 3,
+      "id": 3
+    },
+    {
+      "aluguel_id": 2,
+      "jogo_id": 5,
+      "id": 4
+    },
+    {
+      "aluguel_id": 3,
+      "jogo_id": 3,
+      "id": 5
+    },
+    {
+      "aluguel_id": 4,
+      "jogo_id": 2,
+      "id": 6
+    },
+    {
+      "aluguel_id": 5,
+      "jogo_id": 5,
+      "id": 7
+    }
+  ]
 }
