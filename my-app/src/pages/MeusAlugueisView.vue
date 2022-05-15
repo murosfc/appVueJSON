@@ -9,17 +9,16 @@
             <v-col cols="12">
                 <v-data-table dense :headers="headers" :items="alugueis" item-key="id" class="elevation-1" @click:row="showAluguel">
                 
-                <template v-slot:[`item.valorTotal`]="{ item }">
-                            {{ (item.valorTotal).toFixed(2) }}
-                </template> 
-                
-                <template v-slot:top>
-                    <v-toolbar flat>
-                    <v-toolbar-title>Meus Alugueis</v-toolbar-title>                                     
-                    <v-spacer></v-spacer>
-                    </v-toolbar>
-                </template>
-                           
+                    <template v-slot:[`item.valorTotal`]="{ item }">
+                                {{ (item.valorTotal).toFixed(2) }}
+                    </template> 
+                    
+                    <template v-slot:top>
+                        <v-toolbar flat>
+                        <v-toolbar-title>Meus Alugueis</v-toolbar-title>                                     
+                        <v-spacer></v-spacer>
+                        </v-toolbar>
+                    </template>                           
                           
                 </v-data-table>                              
             </v-col>
@@ -60,7 +59,10 @@
                         <v-data-table dense :headers="headerJogos" :items="jogoInThisAluguel" item-key="id" class="elevation-1"> 
                         <template v-slot:[`item.index`]="{ index }">
                             {{ index + 1 }}
-                        </template>                                                                     
+                        </template>
+                        <template v-slot:[`item.valor`]="{ item }">
+                            {{ (item.valor).toFixed(2) }}
+                        </template>                                                                      
                         </v-data-table>
                         
                     </v-row>                            

@@ -183,7 +183,7 @@ export default ({
         deleteItem(item) {        
         var temAluguel = this.alugueis.find( a => a.id_funcionario == item.id);
         if (temAluguel != null){
-            alert("Este funcioário possui aluguel registrado e não pode ser excluído!");
+            alert("Este funcionário possui aluguel registrado e não pode ser excluído!");
         }
         else{            
             confirm("Deseja apagar este item de id ?" + item.id) &&
