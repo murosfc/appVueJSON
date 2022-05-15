@@ -153,14 +153,13 @@ export default ({
         this.editedItem = Object.assign({}, item);
         this.dialog = true;
         },
-        deleteItem(item) {
-        const index = this.plataformas.indexOf(item);            
+        deleteItem(item) {                   
         confirm("Deseja apagar o item de id "+  item.id +"?") &&
             axios
             .delete("http://localhost:3000/plataformas/" + item.id)
             .then((response) => {
                 console.log(response);                
-                this.plataformas.splice(index, 1);                
+                this.inicializa();                
             })
             .catch((error) => console.log(error));
         }             

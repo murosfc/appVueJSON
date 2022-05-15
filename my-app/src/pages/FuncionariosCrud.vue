@@ -168,8 +168,8 @@ export default ({
                 axios
                 .post("http://localhost:3000/funcionarios", this.editedItem)
                 .then((response) => {
-                    this.editedItem = response.data;
-                    this.funcionarios.push(this.editedItem);
+                    console.log(response.data);
+                    this.inicializa();
                     this.close();
                 })
                 .catch((error) => console.log(error));
@@ -180,8 +180,7 @@ export default ({
         this.editedItem = Object.assign({}, item);
         this.dialog = true;
         },
-        deleteItem(item) {
-        const index = this.funcionarios.indexOf(item);
+        deleteItem(item) {        
         var temAluguel = this.alugueis.find( a => a.id_funcionario == item.id);
         if (temAluguel != null){
             alert("Este funcioário possui aluguel registrado e não pode ser excluído!");
@@ -192,7 +191,7 @@ export default ({
                 .delete("http://localhost:3000/funcionarios/" + item.id)
                 .then((response) => {
                     console.log(response.data);
-                    this.funcionarios.splice(index, 1);                
+                    this.inicializa();                
                 })
                 .catch((error) => console.log(error));
         }

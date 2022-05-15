@@ -46,7 +46,7 @@
       "senha": "Mh4921Bah@"
     },
     {
-      "id": "2",
+      "id": 2,
       "nome": "Pedro da Silva",
       "nick": "theSniper",
       "whatsapp": "(22)9970-0002",
@@ -54,7 +54,7 @@
       "senha": "23@Rfds31@"
     },
     {
-      "id": "3",
+      "id": 3,
       "nome": "Carlos Henrique Oliveira",
       "nick": "chclucher",
       "whatsapp": "(22)9970-0003",
@@ -62,7 +62,7 @@
       "senha": "cH35sd!2$"
     },
     {
-      "id": "4",
+      "id": 4,
       "nome": "Camila Barros Prado",
       "nick": "camiCamper",
       "whatsapp": "(22)9970-0004",
@@ -70,7 +70,7 @@
       "senha": "Cmm@454$ma"
     },
     {
-      "id": "5",
+      "id": 5,
       "nome": "Larissa Hespanhol",
       "nick": "lari",
       "whatsapp": "(22)9970-0005",
@@ -132,23 +132,23 @@
   ],
   "plataformas": [
     {
-      "id": "1",
+      "id": 1,
       "nome": "Nintendo Switch"
     },
     {
-      "id": "2",
+      "id": 2,
       "nome": "Playstation 4"
     },
     {
-      "id": "3",
+      "id": 3,
       "nome": "Playstation 5"
     },
     {
-      "id": "4",
+      "id": 4,
       "nome": "Xbox One/X"
     },
     {
-      "id": "5",
+      "id": 5,
       "nome": "Xbox Series"
     }
   ],

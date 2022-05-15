@@ -142,15 +142,15 @@ export default ({
         alert("e-mail ou senha inválido");
       }                   
     },
-    logout(){
-      window.open("/", '_blank');
+    logout(){      
       this.session.funcionario = false;
       this.session.cliente = false;
       this.dadosLogin = this.defaultDadosLogin;      
       this.updateLinks();
       document.getElementById("logado").style.visibility = "hidden";
       document.getElementById("logado").style.display = "none";      
-      document.getElementById("jogos-disponiveis").style.display = "none";       
+      document.getElementById("jogos-disponiveis").style.display = "none";
+      window.open("/", '_self');       
     },
     updateLinks(){     
       if (this.session.funcionario){

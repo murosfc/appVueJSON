@@ -177,9 +177,9 @@ export default ({
                 axios
                 .post("http://localhost:3000/clientes", this.editedItem)
                 .then((response) => {
-                    this.editItem = response.data;
-                    this.clientes.push(this.editedItem);
-                    this.close();
+                    console.log(response.data);
+                    this.inicializa();
+                    this.close();                    
                 })
                 .catch((error) => console.log(error));
             }         
@@ -189,8 +189,7 @@ export default ({
         this.editedItem = Object.assign({}, item);
         this.dialog = true;
         },
-        deleteItem(item) {
-        const index = this.clientes.indexOf(item);
+        deleteItem(item) {        
         var temAluguel = this.alugueis.find( a => a.id_cliente == item.id);
         if (temAluguel != null){
             alert("Este cliente possui aluguel registrado e não pode ser excluído!");
@@ -201,7 +200,7 @@ export default ({
                 .delete("http://localhost:3000/clientes/" + item.id)
                 .then((response) => {
                     console.log(response.data);
-                    this.clientes.splice(index, 1);                
+                    this.inicializa();                                    
                 })
                 .catch((error) => console.log(error));
         }

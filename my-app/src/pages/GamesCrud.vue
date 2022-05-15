@@ -151,8 +151,7 @@ export default ({
             .then((response)=> { 
                 for (var i=0;i<response.data.length;i++){
                     this.plataformas.push(response.data[i].nome);
-                } 
-                console.log(this.plataformas);                                   
+                }                                                  
             })                       
             .catch((error)=> console.log(error));
              axios("http://localhost:3000/jogoInAluguel")
@@ -188,10 +187,9 @@ export default ({
                 axios
                 .post("http://localhost:3000/games", this.editedItem)
                 .then((response) => {
-                    this.editedItem = response.data;
-                    this.jogos.push(this.editedItem);
-                    this.close();
-                    window.open("/games", '_self');
+                    console.log(response.data);
+                    this.inicializa();
+                    this.close();                    
                 })
                 .catch((error) => console.log(error));
             }         
@@ -201,8 +199,7 @@ export default ({
         this.editedItem = Object.assign({}, item);
         this.dialog = true;
         },
-        deleteItem(item) {
-        const index = this.jogos.indexOf(item);
+        deleteItem(item) {        
         var temAluguel = this.jogoInAluguel.find( j => j.jogo_id == item.id);
         if (temAluguel != null){
             alert("Este jogo está vinculado a um aluguel e não pode ser excluído!");
@@ -211,9 +208,9 @@ export default ({
             confirm("Deseja apagar este item de id ?" + item.id) &&
                 axios
                 .delete("http://localhost:3000/games/" + item.id)
-                .then((response) => {
-                    console.log(response.data);
-                    this.games.splice(index, 1);                
+                .then((response) => {                   
+                    console.log(response.data);                    
+                    this.inicializa();                
                 })
                 .catch((error) => console.log(error));
             }
