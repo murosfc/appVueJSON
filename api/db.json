@@ -5,21 +5,21 @@
       "titulo": "The Legend of Zelda™: Breath of the Wild",
       "plataforma": "Nintendo Switch",
       "urlimg": "https://assets.nintendo.com/image/upload/c_pad,f_auto,h_613,q_auto,w_1089/ncom/pt_BR/games/switch/t/the-legend-of-zelda-breath-of-the-wild-switch/hero?v=2022021721",
-      "valor": 15.50
+      "valor": 15.5
     },
     {
       "id": 2,
       "titulo": "Forza Horizon 5 Edição Padrão",
       "plataforma": "Xbox Series",
       "urlimg": "https://cdn.akamai.steamstatic.com/steam/apps/1551360/capsule_616x353.jpg?t=1650550157",
-      "valor": 15.50
+      "valor": 15.5
     },
     {
       "id": 3,
       "titulo": "Super Mario Odissey",
       "plataforma": "Nintendo Switch",
       "urlimg": "https://assets.nintendo.com/image/upload/c_pad,f_auto,h_613,q_auto,w_1089/ncom/pt_BR/games/switch/s/super-mario-odyssey-switch/hero?v=2022021722",
-      "valor": 10.00
+      "valor": 10
     },
     {
       "id": 4,
@@ -192,7 +192,7 @@
       "dataFimAluguel": "20/05/2022",
       "id_funcionario": 5,
       "valorTotal": 20
-    }
+    }    
   ],
   "jogoInAluguel": [
     {
@@ -229,6 +229,6 @@
       "aluguel_id": 5,
       "jogo_id": 5,
       "id": 7
-    }
+    }    
   ]
 }

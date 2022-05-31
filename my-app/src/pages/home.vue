@@ -177,17 +177,15 @@ export default ({
           }
           selectFunc.push({"id": parseInt(this.funcionarios[i].id), "qtAlugueis": parseInt(countAlugueis)});
         }  
-        var menor = 10000000;
-        console.log(selectFunc);
+        var menor = 10000000;        
         for (i=0; i < selectFunc.length; i++){
           if(selectFunc[i].qtAlugueis < menor){
             idFunc = selectFunc[i].id;
             menor = selectFunc[i].qtAlugueis;
-          }
-          console.log("iteração "+i+" idFunc: "+selectFunc[i].id+" alugueis: "+selectFunc[i].qtAlugueis+" menor: "+menor);
+          }          
         }
         return idFunc;     
-      },
+      },      
       alugar(){
         if(!this.$parent.session.cliente){
           if(this.$parent.session.funcionario){
@@ -201,13 +199,18 @@ export default ({
                 this.alugueis = response.data;                                         
             })                       
             .catch((error)=> console.log(error));                          
-          var id_cliente = this.$parent.dadosLogin.id;          
+          var id_cliente = this.$parent.dadosLogin.id;
           var today = new Date();
           var dd = String(today.getDate()).padStart(2, '0');
           var mm = String(today.getMonth() + 1).padStart(2, '0'); //janeiro é 0
           var yyyy = today.getFullYear();
-          var dataInicioAluguel = dd + '/' + mm + '/' + yyyy;                  
-          var dataFimAluguel = (parseInt(dd)+7) + '/' + mm + '/' + yyyy;         
+          var dataInicioAluguel = dd + '/' + mm + '/' + yyyy;        
+          var nextWeek = new Date();
+          nextWeek.setDate(today.getDate() +7 );
+          dd = String(nextWeek.getDate()).padStart(2, '0');
+          mm = String(nextWeek.getMonth() + 1).padStart(2, '0'); //janeiro é 0
+          yyyy = nextWeek.getFullYear();
+          var dataFimAluguel = dd + '/' + mm + '/' + yyyy;             
           var id_funcionario = this.defineFuncionario(); 
           var valorTotal = this.updateTotal(); 
           var novoAluguel = {"id": null, "id_cliente": id_cliente, "dataInicioAluguel": dataInicioAluguel, "dataFimAluguel": dataFimAluguel,"id_funcionario": id_funcionario, "valorTotal": valorTotal};        
@@ -230,7 +233,7 @@ export default ({
             .catch((error) => console.log(error));          
         }
       },
-    },    
+    },      
     created() {
       this.inicializa();
     }    
