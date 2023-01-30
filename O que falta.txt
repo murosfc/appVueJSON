@@ -1,1 +1,0 @@
-1 - Salvar aluguel a partir do carrinho de compras;
